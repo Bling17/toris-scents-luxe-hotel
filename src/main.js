@@ -36,7 +36,6 @@ function handleSuccessfulAuth(nameOrEmail) {
     openAuthBtn.innerText = formattedName;
     openAuthBtn.classList.remove('text-gray-300');
     openAuthBtn.classList.add('text-gold', 'font-semibold');
-    // Disable click since they are already logged in
     openAuthBtn.style.pointerEvents = 'none';
   }
 
@@ -57,7 +56,12 @@ gateRegisterForm.addEventListener('submit', (e) => {
 });
 
 let currentBookingData = { nights: 0, total: 0, suiteName: '' };
-window.hotelReservations = window.hotelReservations || [];
+
+// Helper to manage persistent reservations in localStorage
+function getStoredReservations() {
+  const data = localStorage.getItem('hotelReservations');
+  return data ? JSON.parse(data) : [];
+}
 
 // Booking Calculator Logic
 document.getElementById('calculateBtn').addEventListener('click', () => {
@@ -135,8 +139,10 @@ document.getElementById('paymentForm').addEventListener('submit', (e) => {
     date: new Date().toLocaleDateString()
   };
 
-  // Push to global store & update admin feed
-  window.hotelReservations.push(newReservation);
+  // Save to localStorage so it persists across reloads
+  const reservations = getStoredReservations();
+  reservations.push(newReservation);
+  localStorage.setItem('hotelReservations', JSON.stringify(reservations));
   updateAdminReservationsUI();
 
   // Populate receipt details
@@ -287,6 +293,7 @@ const adminReservationsPanel = document.getElementById('adminReservationsPanel')
 
 openAdminBtn.addEventListener('click', () => {
   adminModal.classList.remove('hidden');
+  updateAdminReservationsUI();
 });
 
 closeAdminModal.addEventListener('click', () => {
@@ -334,13 +341,15 @@ function updateAdminReservationsUI() {
   const container = document.getElementById('reservationsListContainer');
   if (!container) return;
 
-  if (window.hotelReservations.length === 0) {
-    container.innerHTML = `<p class="text-gray-400 italic">No bookings recorded in current session memory yet. Test a reservation via the checkout widget!</p>`;
+  const reservations = getStoredReservations();
+
+  if (reservations.length === 0) {
+    container.innerHTML = `<p class="text-gray-400 italic">No bookings recorded yet. Test a reservation via the checkout widget!</p>`;
     return;
   }
 
   container.innerHTML = '';
-  window.hotelReservations.forEach(res => {
+  reservations.forEach(res => {
     container.innerHTML += `
       <div class="bg-neutral-950 border border-white/10 p-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
         <div>
