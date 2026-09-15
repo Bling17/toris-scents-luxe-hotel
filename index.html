@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth bg-[#111111] text-white">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toris Scents Luxe Hotel & Suites | 5-Star Luxury</title>
+    <!-- Tailwind CSS Play CDN for Instant Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              gold: '#D4AF37',
+              darkBg: '#111111',
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Google Fonts for Luxury Serif Styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+      body { font-family: 'Montserrat', sans-serif; }
+      h1, h2, h3, .serif-font { font-family: 'Cormorant Garamond', serif; }
+    </style>
+  </head>
+  <body class="bg-darkBg text-white">
+
+    <!-- Navigation Bar -->
+    <header class="absolute top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6 border-b border-white/10">
+      <div class="text-2xl tracking-widest uppercase serif-font text-gold font-bold">
+        Toris Scents Luxe
+      </div>
+      <nav class="hidden md:flex space-x-8 text-sm tracking-widest uppercase text-gray-300">
+        <a href="#rooms" class="hover:text-gold transition">Suites</a>
+        <a href="#dining" class="hover:text-gold transition">Dining</a>
+        <a href="#amenities" class="hover:text-gold transition">Amenities</a>
+        <a href="#gallery" class="hover:text-gold transition">Gallery</a>
+      </nav>
+      <div>
+        <a href="#book" class="bg-gold text-darkBg px-6 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-white transition">
+          Book Your Stay
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2000&q=80');">
+      <div class="text-center px-4 max-w-3xl">
+        <span class="text-gold uppercase tracking-[0.3em] text-sm mb-4 block">Uncompromising Luxury & Elegance</span>
+        <h1 class="text-5xl md:text-7xl font-bold tracking-wide mb-6">Experience Timeless Splendor</h1>
+        <p class="text-gray-300 text-lg mb-8 font-light">Immerse yourself in world-class comfort, breathtaking views, and bespoke hospitality tailored just for you.</p>
+        <div class="flex justify-center space-x-4">
+          <a href="#rooms" class="border border-gold text-gold px-8 py-4 text-xs uppercase tracking-widest hover:bg-gold hover:text-darkBg transition">Explore Suites</a>
+        </div>
+      </div>
+    </section>
+
+<!-- Interactive Booking Calculator Widget -->
+    <section id="book" class="bg-neutral-900 border-y border-white/10 py-12 px-6">
+      <div class="max-w-4xl mx-auto bg-black border border-gold/30 p-8 shadow-2xl">
+        <h3 class="text-2xl font-bold text-center mb-6 serif-font text-gold">Reserve Your Experience</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Check-in Date</label>
+            <input type="date" id="checkin" class="w-full bg-neutral-900 border border-white/20 p-3 text-white text-sm focus:border-gold outline-none">
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Check-out Date</label>
+            <input type="date" id="checkout" class="w-full bg-neutral-900 border border-white/20 p-3 text-white text-sm focus:border-gold outline-none">
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Select Suite</label>
+            <select id="suiteType" class="w-full bg-neutral-900 border border-white/20 p-3 text-white text-sm focus:border-gold outline-none">
+              <option value="1200">The Royal Penthouse ($1,200/night)</option>
+              <option value="850">Oceanfront Deluxe ($850/night)</option>
+              <option value="650">Executive Garden Villa ($650/night)</option>
+            </select>
+          </div>
+          <div>
+            <button id="calculateBtn" class="w-full bg-gold text-darkBg py-3 text-xs uppercase tracking-widest font-bold hover:bg-white transition h-[46px]">
+              Calculate Total
+            </button>
+          </div>
+        </div>
+
+        <!-- Result Display Area -->
+        <div id="resultArea" class="hidden mt-6 pt-6 border-t border-white/10 text-center">
+          <p class="text-gray-300 text-sm mb-1">Estimated Stay Total for <span id="nightsCount" class="text-gold font-bold">0</span> Nights:</p>
+          <div id="totalPrice" class="text-3xl font-bold text-gold serif-font">$0</div>
+          <button class="mt-4 bg-transparent border border-gold text-gold px-6 py-2 text-xs uppercase tracking-widest hover:bg-gold hover:text-darkBg transition">
+            Proceed to Secure Checkout
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rooms & Suites Showcase Grid -->
+    <section id="rooms" class="py-24 px-8 max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Accommodations</span>
+        <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">Signature Suites & Residences</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Each sanctuary is meticulously designed to offer sweeping vistas, bespoke furnishings, and uncompromising 5-star comfort.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Room 1: The Royal Penthouse -->
+        <div class="bg-neutral-900 border border-white/10 group overflow-hidden transition duration-300 hover:border-gold/50">
+          <div class="h-64 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80');"></div>
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs uppercase tracking-widest text-gold">Top Tier</span>
+              <span class="text-xs text-gray-400">Max 3 Guests</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-2 serif-font">The Royal Penthouse</h3>
+            <p class="text-gray-400 text-sm mb-6 font-light">Panoramic city views, private 24/7 butler service, and an expansive master marble bathroom with a deep soaking tub.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-white/10">
+              <div>
+                <span class="text-gold font-bold text-xl serif-font">$1,200</span>
+                <span class="text-xs text-gray-400"> / night</span>
+              </div>
+              <a href="#book" class="bg-gold text-darkBg px-4 py-2 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Reserve Suite</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Room 2: Oceanfront Deluxe Suite -->
+        <div class="bg-neutral-900 border border-white/10 group overflow-hidden transition duration-300 hover:border-gold/50">
+          <div class="h-64 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=800&q=80');"></div>
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs uppercase tracking-widest text-gold">Most Popular</span>
+              <span class="text-xs text-gray-400">Max 2 Guests</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-2 serif-font">Oceanfront Deluxe Suite</h3>
+            <p class="text-gray-400 text-sm mb-6 font-light">Direct ocean vistas from a private wrap-around terrace, plush king-size bedding, and hand-crafted room amenities.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-white/10">
+              <div>
+                <span class="text-gold font-bold text-xl serif-font">$850</span>
+                <span class="text-xs text-gray-400"> / night</span>
+              </div>
+              <a href="#book" class="bg-gold text-darkBg px-4 py-2 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Reserve Suite</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Room 3: Executive Garden Villa -->
+        <div class="bg-neutral-900 border border-white/10 group overflow-hidden transition duration-300 hover:border-gold/50">
+          <div class="h-64 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80');"></div>
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs uppercase tracking-widest text-gold">Secluded Sanctuary</span>
+              <span class="text-xs text-gray-400">Max 4 Guests</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-2 serif-font">Executive Garden Villa</h3>
+            <p class="text-gray-400 text-sm mb-6 font-light">A private sanctuary featuring your own secluded plunge pool, lush tropical courtyard, and a cozy outdoor stone fireplace.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-white/10">
+              <div>
+                <span class="text-gold font-bold text-xl serif-font">$650</span>
+                <span class="text-xs text-gray-400"> / night</span>
+              </div>
+              <a href="#book" class="bg-gold text-darkBg px-4 py-2 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Reserve Suite</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Fine Dining & Culinary Experiences Section -->
+    <section id="dining" class="py-24 px-8 max-w-7xl mx-auto border-t border-white/10">
+      <div class="text-center mb-16">
+        <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Gastronomy</span>
+        <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">World-Class Fine Dining</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Savor extraordinary culinary artistry crafted by award-winning international chefs, paired with rare vintages from our subterranean cellar.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <!-- Dining Item 1 -->
+        <div class="group overflow-hidden border border-white/10 bg-neutral-900">
+          <div class="h-80 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1000&q=80');"></div>
+          <div class="p-8">
+            <span class="text-xs uppercase tracking-widest text-gold mb-2 block">Signature Restaurant</span>
+            <h3 class="text-3xl font-bold mb-3 serif-font">L'Aurelia Haute Cuisine</h3>
+            <p class="text-gray-400 text-sm mb-6 font-light">An exquisite multi-course tasting menu blending French culinary techniques with rare local flavors, served in an ambient, candle-lit dining room.</p>
+            <div class="flex justify-between items-center text-xs uppercase tracking-widest text-gray-300 border-t border-white/10 pt-4">
+              <span>Hours: 6:00 PM – 11:00 PM</span>
+              <span class="text-gold">Reservations Required</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dining Item 2 -->
+        <div class="group overflow-hidden border border-white/10 bg-neutral-900">
+          <div class="h-80 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1000&q=80');"></div>
+          <div class="p-8">
+            <span class="text-xs uppercase tracking-widest text-gold mb-2 block">Rooftop Lounge</span>
+            <h3 class="text-3xl font-bold mb-3 serif-font">The Obsidian Sky Bar</h3>
+            <p class="text-gray-400 text-sm mb-6 font-light">Unwind above the skyline with bespoke artisanal cocktails, vintage champagne selections, and live ambient jazz performances under the stars.</p>
+            <div class="flex justify-between items-center text-xs uppercase tracking-widest text-gray-300 border-t border-white/10 pt-4">
+              <span>Hours: 4:00 PM – 2:00 AM</span>
+              <span class="text-gold">Smart Casual Attire</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Amenities & Wellness Section -->
+    <section id="amenities" class="py-24 px-8 max-w-7xl mx-auto border-t border-white/10">
+      <div class="text-center mb-16">
+        <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Indulgence & Relaxation</span>
+        <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">Unmatched Hotel Amenities</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Curated to rejuvenate your mind, body, and spirit throughout your stay.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <!-- Amenity 1 -->
+        <div class="bg-neutral-900 border border-white/10 p-8 text-center hover:border-gold/50 transition">
+          <div class="text-gold text-3xl mb-4">✦</div>
+          <h3 class="text-xl font-bold mb-2 serif-font">Aurelia Spa & Wellness</h3>
+          <p class="text-gray-400 text-xs leading-relaxed font-light">Holistic massages, hydrotherapy pools, and personalized organic skincare treatments.</p>
+        </div>
+
+        <!-- Amenity 2 -->
+        <div class="bg-neutral-900 border border-white/10 p-8 text-center hover:border-gold/50 transition">
+          <div class="text-gold text-3xl mb-4">✦</div>
+          <h3 class="text-xl font-bold mb-2 serif-font">Infinity Pool & Cabanas</h3>
+          <p class="text-gray-400 text-xs leading-relaxed font-light">Temperature-controlled cliffside infinity pool paired with private VIP cabana service.</p>
+        </div>
+
+        <!-- Amenity 3 -->
+        <div class="bg-neutral-900 border border-white/10 p-8 text-center hover:border-gold/50 transition">
+          <div class="text-gold text-3xl mb-4">✦</div>
+          <h3 class="text-xl font-bold mb-2 serif-font">Private Yacht Charter</h3>
+          <p class="text-gray-400 text-xs leading-relaxed font-light">Explore pristine coastline waters on our luxury private yacht with a dedicated crew.</p>
+        </div>
+
+        <!-- Amenity 4 -->
+        <div class="bg-neutral-900 border border-white/10 p-8 text-center hover:border-gold/50 transition">
+          <div class="text-gold text-3xl mb-4">✦</div>
+          <h3 class="text-xl font-bold mb-2 serif-font">24/7 Elite Concierge</h3>
+          <p class="text-gray-400 text-xs leading-relaxed font-light">From private jet arrangements to custom excursions, our concierge handles every detail.</p>
+        </div>
+      </div>
+    </section>
+
+<!-- Footer Section -->
+    <footer class="bg-neutral-950 border-t border-white/10 py-16 px-8 text-gray-400">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <!-- Col 1: Brand Info -->
+        <div>
+          <div class="text-2xl tracking-widest uppercase serif-font text-gold font-bold mb-4">
+            Toris Scents Luxe
+          </div>
+          <p class="text-xs leading-relaxed font-light mb-6">
+            An iconic sanctuary of refined elegance, world-class hospitality, and bespoke luxury experiences tailored for the distinguished traveler.
+          </p>
+          <div class="flex space-x-4 text-gold">
+            <span class="text-sm cursor-pointer hover:text-white transition">Instagram</span>
+            <span class="text-sm cursor-pointer hover:text-white transition">Twitter</span>
+            <span class="text-sm cursor-pointer hover:text-white transition">LinkedIn</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div>
+          <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-4">Navigation</h4>
+          <ul class="space-y-2 text-xs font-light">
+            <li><a href="#rooms" class="hover:text-gold transition">Suites & Residences</a></li>
+            <li><a href="#dining" class="hover:text-gold transition">Fine Dining</a></li>
+            <li><a href="#amenities" class="hover:text-gold transition">Spa & Amenities</a></li>
+            <li><a href="#book" class="hover:text-gold transition">Reservations</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Contact Details -->
+        <div>
+          <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-4">Concierge Desk</h4>
+          <p class="text-xs font-light mb-2">100 Luxury Avenue, Coastline View</p>
+          <p class="text-xs font-light mb-2">Phone: +1 (800) 555-LUXE</p>
+          <p class="text-xs font-light">Email: concierge@torisscentsluxe.com</p>
+        </div>
+
+        <!-- Col 4: Newsletter -->
+        <div>
+          <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-4">Private Journal</h4>
+          <p class="text-xs font-light mb-4">Subscribe to receive exclusive seasonal offers and private event invitations.</p>
+          <div class="flex">
+            <input type="email" placeholder="Enter your email" class="bg-neutral-900 border border-white/20 p-2 text-xs text-white outline-none focus:border-gold w-full">
+            <button class="bg-gold text-darkBg px-4 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Join</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright Bottom Bar -->
+      <div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs font-light">
+        <p>&copy; 2026 Toris Scents Luxe Hotel & Suites. All Rights Reserved.</p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <a href="#" class="hover:text-gold transition">Privacy Policy</a>
+          <a href="#" class="hover:text-gold transition">Terms of Service</a>
+          <a href="#" class="hover:text-gold transition">Security</a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
