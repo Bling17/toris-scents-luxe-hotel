@@ -39,7 +39,10 @@
         <a href="#amenities" class="hover:text-gold transition">Amenities</a>
         <a href="#gallery" class="hover:text-gold transition">Gallery</a>
       </nav>
-      <div>
+      <div class="flex items-center space-x-4">
+        <button id="openAuthBtn" class="text-xs uppercase tracking-widest text-gray-300 hover:text-gold transition hidden md:block">
+          Sign In / Up
+        </button>
         <a href="#book" class="bg-gold text-darkBg px-6 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-white transition">
           Book Your Stay
         </a>
@@ -371,6 +374,53 @@
           </button>
         </div>
 
+      </div>
+    </div>
+
+<!-- Auth Modal (Login / Sign Up) -->
+    <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-neutral-900 border border-gold/50 max-w-md w-full p-8 shadow-2xl relative">
+        <button id="closeAuthModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
+        
+        <!-- Tab Switcher -->
+        <div class="flex border-b border-white/10 mb-6 text-xs uppercase tracking-widest font-bold">
+          <button id="tabLoginBtn" class="flex-1 pb-3 text-gold border-b-2 border-gold transition">Sign In</button>
+          <button id="tabRegisterBtn" class="flex-1 pb-3 text-gray-400 hover:text-white transition">Create Account</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="space-y-4 text-xs">
+          <div>
+            <label class="block text-gray-400 uppercase tracking-widest mb-1">Email Address</label>
+            <input type="email" required placeholder="josh@example.com" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+          </div>
+          <div>
+            <label class="block text-gray-400 uppercase tracking-widest mb-1">Password</label>
+            <input type="password" required placeholder="••••••••" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+          </div>
+          <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-2">
+            Access Account
+          </button>
+        </form>
+
+        <!-- Register Form (Hidden by Default) -->
+        <form id="registerForm" class="space-y-4 text-xs hidden">
+          <div>
+            <label class="block text-gray-400 uppercase tracking-widest mb-1">Full Name</label>
+            <input type="text" required placeholder="Josh Osagie" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+          </div>
+          <div>
+            <label class="block text-gray-400 uppercase tracking-widest mb-1">Email Address</label>
+            <input type="email" required placeholder="josh@example.com" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+          </div>
+          <div>
+            <label class="block text-gray-400 uppercase tracking-widest mb-1">Create Password</label>
+            <input type="password" required placeholder="••••••••" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+          </div>
+          <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-2">
+            Register Account
+          </button>
+        </form>
       </div>
     </div>
 

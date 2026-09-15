@@ -108,3 +108,50 @@ document.getElementById('closeReceiptBtn').addEventListener('click', () => {
   checkoutModal.classList.add('hidden');
   window.location.reload();
 });
+
+// Auth Modal Interactivity
+const authModal = document.getElementById('authModal');
+const openAuthBtn = document.getElementById('openAuthBtn');
+const closeAuthModal = document.getElementById('closeAuthModal');
+const tabLoginBtn = document.getElementById('tabLoginBtn');
+const tabRegisterBtn = document.getElementById('tabRegisterBtn');
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
+
+openAuthBtn.addEventListener('click', () => {
+  authModal.classList.remove('hidden');
+});
+
+closeAuthModal.addEventListener('click', () => {
+  authModal.classList.add('hidden');
+});
+
+tabLoginBtn.addEventListener('click', () => {
+  tabLoginBtn.classList.add('text-gold', 'border-b-2', 'border-gold');
+  tabLoginBtn.classList.remove('text-gray-400');
+  tabRegisterBtn.classList.remove('text-gold', 'border-b-2', 'border-gold');
+  tabRegisterBtn.classList.add('text-gray-400');
+  loginForm.classList.remove('hidden');
+  registerForm.classList.add('hidden');
+});
+
+tabRegisterBtn.addEventListener('click', () => {
+  tabRegisterBtn.classList.add('text-gold', 'border-b-2', 'border-gold');
+  tabRegisterBtn.classList.remove('text-gray-400');
+  tabLoginBtn.classList.remove('text-gold', 'border-b-2', 'border-gold');
+  tabLoginBtn.classList.add('text-gray-400');
+  registerForm.classList.remove('hidden');
+  loginForm.classList.add('hidden');
+});
+
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('Welcome back! You have successfully signed in to Toris Scents Luxe.');
+  authModal.classList.add('hidden');
+});
+
+registerForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('Account created successfully! Welcome to your elite member portal.');
+  authModal.classList.add('hidden');
+});
