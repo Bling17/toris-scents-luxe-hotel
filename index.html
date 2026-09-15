@@ -38,6 +38,10 @@
         <a href="#dining" class="hover:text-gold transition">Dining</a>
         <a href="#amenities" class="hover:text-gold transition">Amenities</a>
         <a href="#gallery" class="hover:text-gold transition">Gallery</a>
+<!-- Add this inside your Navigation <nav>  -->
+    <button id="openAdminBtn" class="text-xs uppercase tracking-widest text-gold hover:text-white transition hidden md:block border border-gold/30 px-3 py-1.5">
+      Management Admin
+    </button>
       </nav>
       <div class="flex items-center space-x-4">
         <button id="openAuthBtn" class="text-xs uppercase tracking-widest text-gray-300 hover:text-gold transition hidden md:block">
@@ -443,7 +447,82 @@
         </div>
       </div>
     </footer>
+<!-- Management Admin Portal Modal -->
+    <div id="adminModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-neutral-900 border border-gold max-w-3xl w-full p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <button id="closeAdminModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
+        
+        <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+          <div>
+            <span class="text-xs uppercase tracking-[0.3em] text-gold block">Toris Scents Luxe Management</span>
+            <h3 class="text-2xl font-bold serif-font text-white">Hotel Administration Dashboard</h3>
+          </div>
+          <button id="adminLogoutBtn" class="bg-neutral-800 text-gray-300 px-4 py-2 text-xs uppercase tracking-wider hover:bg-gold hover:text-darkBg transition">Lock Dashboard</button>
+        </div>
 
+        <!-- Admin Login Screen (Protected View) -->
+        <div id="adminLoginView" class="max-w-sm mx-auto py-8">
+          <h4 class="text-lg font-bold text-gold serif-font mb-4 text-center">Restricted Access</h4>
+          <p class="text-gray-400 text-xs text-center mb-6 font-light">Enter hotel management credentials to access the content control panel.</p>
+          <form id="adminLoginForm" class="space-y-4 text-xs">
+            <div>
+              <label class="block text-gray-400 uppercase tracking-widest mb-1">Admin Passcode</label>
+              <input type="password" id="adminPasscode" required placeholder="••••••••" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold text-center tracking-widest">
+            </div>
+            <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition">
+              Authenticate Admin
+            </button>
+          </form>
+        </div>
+
+        <!-- Admin Dashboard Content (Unlocked View) -->
+        <div id="adminDashboardView" class="hidden space-y-8">
+          <!-- Tab Navigation -->
+          <div class="flex border-b border-white/10 text-xs uppercase tracking-widest font-bold">
+            <button id="tabSuitesBtn" class="pb-3 px-4 text-gold border-b-2 border-gold transition">Manage Suites</button>
+            <button id="tabReservationsBtn" class="pb-3 px-4 text-gray-400 hover:text-white transition">Guest Bookings</button>
+          </div>
+
+          <!-- Section 1: Add / Edit Suites Form -->
+          <div id="adminSuitesPanel" class="space-y-6">
+            <h4 class="text-sm font-bold uppercase tracking-wider text-gold">Add New Suite / Residence</h4>
+            <form id="addSuiteForm" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div>
+                <label class="block text-gray-400 uppercase tracking-widest mb-1">Suite Title</label>
+                <input type="text" id="newSuiteTitle" required placeholder="Imperial Royal Suite" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+              </div>
+              <div>
+                <label class="block text-gray-400 uppercase tracking-widest mb-1">Price Per Night ($)</label>
+                <input type="number" id="newSuitePrice" required placeholder="1500" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-gray-400 uppercase tracking-widest mb-1">Unsplash Image URL</label>
+                <input type="url" id="newSuiteImg" required placeholder="https://images.unsplash.com/..." class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-gray-400 uppercase tracking-widest mb-1">Suite Description</label>
+                <textarea id="newSuiteDesc" required rows="2" placeholder="Private elevator, rooftop terrace..." class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold"></textarea>
+              </div>
+              <div class="md:col-span-2">
+                <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition">
+                  Publish Suite Live to Website
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Section 2: Guest Reservations Panel -->
+          <div id="adminReservationsPanel" class="hidden space-y-4">
+            <h4 class="text-sm font-bold uppercase tracking-wider text-gold">Recent Guest Reservations</h4>
+            <div id="reservationsListContainer" class="space-y-2 text-xs">
+              <p class="text-gray-400 italic">No bookings recorded in current session memory yet. Test a reservation via the checkout widget!</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

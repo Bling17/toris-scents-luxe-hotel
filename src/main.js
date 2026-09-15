@@ -212,3 +212,98 @@ window.openMenuModal = function(type) {
 closeMenuModal.addEventListener('click', () => {
   diningMenuModal.classList.add('hidden');
 });
+
+// Admin Dashboard Interactivity
+const adminModal = document.getElementById('adminModal');
+const openAdminBtn = document.getElementById('openAdminBtn');
+const closeAdminModal = document.getElementById('closeAdminModal');
+const adminLoginForm = document.getElementById('adminLoginForm');
+const adminLoginView = document.getElementById('adminLoginView');
+const adminDashboardView = document.getElementById('adminDashboardView');
+const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+
+const tabSuitesBtn = document.getElementById('tabSuitesBtn');
+const tabReservationsBtn = document.getElementById('tabReservationsBtn');
+const adminSuitesPanel = document.getElementById('adminSuitesPanel');
+const adminReservationsPanel = document.getElementById('adminReservationsPanel');
+
+openAdminBtn.addEventListener('click', () => {
+  adminModal.classList.remove('hidden');
+});
+
+closeAdminModal.addEventListener('click', () => {
+  adminModal.classList.add('hidden');
+});
+
+adminLogoutBtn.addEventListener('click', () => {
+  adminLoginView.classList.remove('hidden');
+  adminDashboardView.classList.add('hidden');
+  document.getElementById('adminPasscode').value = '';
+});
+
+adminLoginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const passcode = document.getElementById('adminPasscode').value;
+  // Simple management passcode for handover (can be changed anytime)
+  if (passcode === 'toris2026' || passcode === 'admin123') {
+    adminLoginView.classList.add('hidden');
+    adminDashboardView.classList.remove('hidden');
+  } else {
+    alert('Invalid management passcode. Please contact senior administration.');
+  }
+});
+
+tabSuitesBtn.addEventListener('click', () => {
+  tabSuitesBtn.classList.add('text-gold', 'border-b-2', 'border-gold');
+  tabSuitesBtn.classList.remove('text-gray-400');
+  tabReservationsBtn.classList.remove('text-gold', 'border-b-2', 'border-gold');
+  tabReservationsBtn.classList.add('text-gray-400');
+  adminSuitesPanel.classList.remove('hidden');
+  adminReservationsPanel.classList.add('hidden');
+});
+
+tabReservationsBtn.addEventListener('click', () => {
+  tabReservationsBtn.classList.add('text-gold', 'border-b-2', 'border-gold');
+  tabReservationsBtn.classList.remove('text-gray-400');
+  tabSuitesBtn.classList.remove('text-gold', 'border-b-2', 'border-gold');
+  tabSuitesBtn.classList.add('text-gray-400');
+  adminReservationsPanel.classList.remove('hidden');
+  adminSuitesPanel.classList.add('hidden');
+});
+
+// Dynamic Suite Addition by Management
+document.getElementById('addSuiteForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const title = document.getElementById('newSuiteTitle').value;
+  const price = document.getElementById('newSuitePrice').value;
+  const img = document.getElementById('newSuiteImg').value;
+  const desc = document.getElementById('newSuiteDesc').value;
+
+  const roomsGrid = document.querySelector('#rooms .grid');
+  
+  const newCard = document.createElement('div');
+  newCard.className = "bg-neutral-900 border border-white/10 group overflow-hidden transition duration-300 hover:border-gold/50";
+  newCard.innerHTML = `
+    <div class="h-64 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('${img}');"></div>
+    <div class="p-6">
+      <div class="flex justify-between items-center mb-3">
+        <span class="text-xs uppercase tracking-widest text-gold">New Listing</span>
+        <span class="text-xs text-gray-400">Bespoke Guest Suite</span>
+      </div>
+      <h3 class="text-2xl font-bold mb-2 serif-font">${title}</h3>
+      <p class="text-gray-400 text-sm mb-6 font-light">${desc}</p>
+      <div class="flex justify-between items-center pt-4 border-t border-white/10">
+        <div>
+          <span class="text-gold font-bold text-xl serif-font">$${parseInt(price).toLocaleString()}</span>
+          <span class="text-xs text-gray-400"> / night</span>
+        </div>
+        <a href="#book" class="bg-gold text-darkBg px-4 py-2 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Reserve Suite</a>
+      </div>
+    </div>
+  `;
+
+  roomsGrid.appendChild(newCard);
+  alert(`Success! "${title}" has been added live to the hotel accommodations catalog.`);
+  adminModal.classList.add('hidden');
+  document.getElementById('addSuiteForm').reset();
+});
