@@ -311,35 +311,66 @@
       <div class="bg-neutral-900 border border-gold/50 max-w-lg w-full p-8 shadow-2xl relative">
         <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
         
-        <h3 class="text-2xl font-bold mb-2 serif-font text-gold">Secure Reservation Checkout</h3>
-        <p class="text-gray-400 text-xs mb-6 font-light">Complete your guest details to confirm your stay at Toris Scents Luxe.</p>
-        
-        <!-- Summary Box -->
-        <div class="bg-black border border-white/10 p-4 mb-6 text-xs space-y-2">
-          <div class="flex justify-between"><span class="text-gray-400">Selected Suite:</span> <span id="modalSuiteName" class="text-white font-semibold">Penthouse</span></div>
-          <div class="flex justify-between"><span class="text-gray-400">Total Nights:</span> <span id="modalNights" class="text-white font-semibold">1</span></div>
-          <div class="flex justify-between pt-2 border-t border-white/10 text-sm"><span class="text-gold font-bold">Total Amount:</span> <span id="modalTotalPrice" class="text-gold font-bold">$1,200</span></div>
+        <!-- Active Checkout Form View -->
+        <div id="checkoutFormView">
+          <h3 class="text-2xl font-bold mb-2 serif-font text-gold">Secure Reservation Checkout</h3>
+          <p class="text-gray-400 text-xs mb-6 font-light">Complete your guest and payment details to confirm your stay at Toris Scents Luxe.</p>
+          
+          <!-- Summary Box -->
+          <div class="bg-black border border-white/10 p-4 mb-6 text-xs space-y-2">
+            <div class="flex justify-between"><span class="text-gray-400">Selected Suite:</span> <span id="modalSuiteName" class="text-white font-semibold">Penthouse</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Total Nights:</span> <span id="modalNights" class="text-white font-semibold">1</span></div>
+            <div class="flex justify-between pt-2 border-t border-white/10 text-sm"><span class="text-gold font-bold">Total Amount:</span> <span id="modalTotalPrice" class="text-gold font-bold">$1,200</span></div>
+          </div>
+
+          <!-- Guest & Payment Form -->
+          <form id="paymentForm" class="space-y-4 text-xs">
+            <div>
+              <label class="block text-gray-400 uppercase tracking-widest mb-1">Full Name</label>
+              <input type="text" id="guestName" required placeholder="Josh Osagie" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+            </div>
+            <div>
+              <label class="block text-gray-400 uppercase tracking-widest mb-1">Email Address</label>
+              <input type="email" id="guestEmail" required placeholder="josh@example.com" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+            </div>
+            <div>
+              <label class="block text-gray-400 uppercase tracking-widest mb-1">Card Number</label>
+              <input type="text" required placeholder="4532 •••• •••• 8921" maxlength="19" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-gray-400 uppercase tracking-widest mb-1">Expiry Date</label>
+                <input type="text" required placeholder="MM/YY" maxlength="5" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+              </div>
+              <div>
+                <label class="block text-gray-400 uppercase tracking-widest mb-1">CVV</label>
+                <input type="password" required placeholder="123" maxlength="4" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+              </div>
+            </div>
+            
+            <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-2">
+              Confirm & Pay Securely
+            </button>
+          </form>
         </div>
 
-        <!-- Guest Details Form -->
-        <form id="paymentForm" class="space-y-4 text-xs">
-          <div>
-            <label class="block text-gray-400 uppercase tracking-widest mb-1">Full Name</label>
-            <input type="text" required placeholder="Josh Osagie" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
-          </div>
-          <div>
-            <label class="block text-gray-400 uppercase tracking-widest mb-1">Email Address</label>
-            <input type="email" required placeholder="josh@example.com" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
-          </div>
-          <div>
-            <label class="block text-gray-400 uppercase tracking-widest mb-1">Phone Number</label>
-            <input type="tel" required placeholder="+1 (555) 019-2834" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
-          </div>
+        <!-- Success E-Receipt View (Hidden Initially) -->
+        <div id="successReceipt" class="hidden text-center py-6 space-y-4">
+          <div class="text-gold text-5xl mb-2">✦</div>
+          <h4 class="text-2xl font-bold serif-font text-gold">Reservation Confirmed</h4>
+          <p class="text-gray-300 text-xs">Thank you, <span id="receiptName" class="text-white font-semibold"></span>! Your payment has been securely processed.</p>
           
-          <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-2">
-            Confirm & Pay Securely
+          <div class="bg-black border border-white/10 p-4 text-left text-xs space-y-2 mt-4">
+            <div class="flex justify-between"><span class="text-gray-400">Reference ID:</span> <span id="receiptRef" class="text-gold font-mono font-bold"></span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Suite Booked:</span> <span id="receiptSuite" class="text-white"></span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Total Paid:</span> <span id="receiptAmount" class="text-gold font-bold"></span></div>
+          </div>
+
+          <button id="closeReceiptBtn" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-6">
+            Return to Homepage
           </button>
-        </form>
+        </div>
+
       </div>
     </div>
 

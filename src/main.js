@@ -69,11 +69,17 @@ document.getElementById('calculateBtn').addEventListener('click', () => {
 const checkoutModal = document.getElementById('checkoutModal');
 const proceedBtn = document.querySelector('#resultArea button');
 const closeModalBtn = document.getElementById('closeModal');
+const checkoutFormView = document.getElementById('checkoutFormView');
+const successReceipt = document.getElementById('successReceipt');
 
 proceedBtn.addEventListener('click', () => {
   document.getElementById('modalSuiteName').innerText = currentBookingData.suiteName;
   document.getElementById('modalNights').innerText = currentBookingData.nights;
   document.getElementById('modalTotalPrice').innerText = `$${currentBookingData.total.toLocaleString()}`;
+  
+  // Reset views
+  checkoutFormView.classList.remove('hidden');
+  successReceipt.classList.add('hidden');
   checkoutModal.classList.remove('hidden');
 });
 
@@ -83,7 +89,22 @@ closeModalBtn.addEventListener('click', () => {
 
 document.getElementById('paymentForm').addEventListener('submit', (e) => {
   e.preventDefault();
-  alert('Thank you! Your payment has been processed successfully, and your reservation confirmation has been sent to your email.');
+  
+  const guestName = document.getElementById('guestName').value;
+  const randomRef = 'TSL-' + Math.floor(100000 + Math.random() * 900000);
+
+  // Populate receipt details
+  document.getElementById('receiptName').innerText = guestName;
+  document.getElementById('receiptRef').innerText = randomRef;
+  document.getElementById('receiptSuite').innerText = currentBookingData.suiteName;
+  document.getElementById('receiptAmount').innerText = `$${currentBookingData.total.toLocaleString()}`;
+
+  // Switch modal view to receipt
+  checkoutFormView.classList.add('hidden');
+  successReceipt.classList.remove('hidden');
+});
+
+document.getElementById('closeReceiptBtn').addEventListener('click', () => {
   checkoutModal.classList.add('hidden');
   window.location.reload();
 });
