@@ -1,10 +1,13 @@
-// Gatekeeper Authentication Logic
+// Gatekeeper & Auth State Handlers
 const authGateModal = document.getElementById('authGateModal');
 const mainWebsiteContent = document.getElementById('mainWebsiteContent');
 const gateLoginTab = document.getElementById('gateLoginTab');
 const gateRegisterTab = document.getElementById('gateRegisterTab');
 const gateLoginForm = document.getElementById('gateLoginForm');
 const gateRegisterForm = document.getElementById('gateRegisterForm');
+
+// Navigation Auth Button reference
+const openAuthBtn = document.getElementById('openAuthBtn');
 
 gateLoginTab.addEventListener('click', () => {
   gateLoginTab.classList.add('text-gold', 'border-b-2', 'border-gold');
@@ -24,16 +27,33 @@ gateRegisterTab.addEventListener('click', () => {
   gateLoginForm.classList.add('hidden');
 });
 
-gateLoginForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+// Helper function to handle successful login/registration display update
+function handleSuccessfulAuth(nameOrEmail) {
+  const derivedName = nameOrEmail.includes('@') ? nameOrEmail.split('@')[0] : nameOrEmail;
+  const formattedName = derivedName.charAt(0).toUpperCase() + derivedName.slice(1);
+
+  if (openAuthBtn) {
+    openAuthBtn.innerText = formattedName;
+    openAuthBtn.classList.remove('text-gray-300');
+    openAuthBtn.classList.add('text-gold', 'font-semibold');
+    // Disable click since they are already logged in
+    openAuthBtn.style.pointerEvents = 'none';
+  }
+
   authGateModal.classList.add('hidden');
   mainWebsiteContent.classList.remove('hidden');
+}
+
+gateLoginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const emailVal = gateLoginForm.querySelector('input[type="email"]').value;
+  handleSuccessfulAuth(emailVal);
 });
 
 gateRegisterForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  authGateModal.classList.add('hidden');
-  mainWebsiteContent.classList.remove('hidden');
+  const nameVal = gateRegisterForm.querySelector('input[type="text"]').value;
+  handleSuccessfulAuth(nameVal);
 });
 
 let currentBookingData = { nights: 0, total: 0, suiteName: '' };
@@ -135,9 +155,8 @@ document.getElementById('closeReceiptBtn').addEventListener('click', () => {
   window.location.reload();
 });
 
-// Auth Modal Interactivity
+// Auth Modal Interactivity (Secondary Header Modal)
 const authModal = document.getElementById('authModal');
-const openAuthBtn = document.getElementById('openAuthBtn');
 const closeAuthModal = document.getElementById('closeAuthModal');
 const tabLoginBtn = document.getElementById('tabLoginBtn');
 const tabRegisterBtn = document.getElementById('tabRegisterBtn');
@@ -172,12 +191,25 @@ tabRegisterBtn.addEventListener('click', () => {
 
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
+  const emailVal = loginForm.querySelector('input[type="email"]').value;
+  const derivedName = emailVal.split('@')[0];
+  const formattedName = derivedName.charAt(0).toUpperCase() + derivedName.slice(1);
+  
+  openAuthBtn.innerText = formattedName;
+  openAuthBtn.classList.remove('text-gray-300');
+  openAuthBtn.classList.add('text-gold', 'font-semibold');
   alert('Welcome back! You have successfully signed in to Toris Scents Luxe.');
   authModal.classList.add('hidden');
 });
 
 registerForm.addEventListener('submit', (e) => {
   e.preventDefault();
+  const nameVal = registerForm.querySelector('input[type="text"]').value;
+  const formattedName = nameVal.charAt(0).toUpperCase() + nameVal.slice(1);
+
+  openAuthBtn.innerText = formattedName;
+  openAuthBtn.classList.remove('text-gray-300');
+  openAuthBtn.classList.add('text-gold', 'font-semibold');
   alert('Account created successfully! Welcome to your elite member portal.');
   authModal.classList.add('hidden');
 });
