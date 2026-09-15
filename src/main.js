@@ -1,35 +1,7 @@
-document.getElementById('calculateBtn').addEventListener('click', () => {
-  const checkinInput = document.getElementById('checkin').value;
-  const checkoutInput = document.getElementById('checkout').value;
-  const suitePricePerNight = parseInt(document.getElementById('suiteType').value);
-  const resultArea = document.getElementById('resultArea');
-
-  if (!checkinInput || !checkoutInput) {
-    alert('Please select both check-in and check-out dates.');
-    return;
-  }
-
-  const checkinDate = new Date(checkinInput);
-  const checkoutDate = new Date(checkoutInput);
-  const timeDifference = checkoutDate.getTime() - checkinDate.getTime();
-  const nights = Math.ceil(timeDifference / (1000 * 3600 * 24));
-
-  if (nights <= 0) {
-    alert('Check-out date must be after the check-in date.');
-    resultArea.classList.add('hidden');
-    return;
-  }
-
-  const grandTotal = nights * suitePricePerNight;
-
-  // Display results
-  document.getElementById('nightsCount').innerText = nights;
-  document.getElementById('totalPrice').innerText = `$${grandTotal.toLocaleString()}`;
-  resultArea.classList.remove('hidden');
-});
-
 let currentBookingData = { nights: 0, total: 0, suiteName: '' };
+window.hotelReservations = window.hotelReservations || [];
 
+// Booking Calculator Logic
 document.getElementById('calculateBtn').addEventListener('click', () => {
   const checkinInput = document.getElementById('checkin').value;
   const checkoutInput = document.getElementById('checkout').value;
@@ -91,7 +63,23 @@ document.getElementById('paymentForm').addEventListener('submit', (e) => {
   e.preventDefault();
   
   const guestName = document.getElementById('guestName').value;
+  const guestEmail = document.getElementById('guestEmail').value;
   const randomRef = 'TSL-' + Math.floor(100000 + Math.random() * 900000);
+
+  // Create reservation object
+  const newReservation = {
+    ref: randomRef,
+    name: guestName,
+    email: guestEmail,
+    suite: currentBookingData.suiteName,
+    nights: currentBookingData.nights,
+    total: currentBookingData.total,
+    date: new Date().toLocaleDateString()
+  };
+
+  // Push to global store & update admin feed
+  window.hotelReservations.push(newReservation);
+  updateAdminReservationsUI();
 
   // Populate receipt details
   document.getElementById('receiptName').innerText = guestName;
@@ -244,10 +232,10 @@ adminLogoutBtn.addEventListener('click', () => {
 adminLoginForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const passcode = document.getElementById('adminPasscode').value;
-  // Simple management passcode for handover (can be changed anytime)
   if (passcode === 'toris2026' || passcode === 'admin123') {
     adminLoginView.classList.add('hidden');
     adminDashboardView.classList.remove('hidden');
+    updateAdminReservationsUI();
   } else {
     alert('Invalid management passcode. Please contact senior administration.');
   }
@@ -269,7 +257,35 @@ tabReservationsBtn.addEventListener('click', () => {
   tabSuitesBtn.classList.add('text-gray-400');
   adminReservationsPanel.classList.remove('hidden');
   adminSuitesPanel.classList.add('hidden');
+  updateAdminReservationsUI();
 });
+
+function updateAdminReservationsUI() {
+  const container = document.getElementById('reservationsListContainer');
+  if (!container) return;
+
+  if (window.hotelReservations.length === 0) {
+    container.innerHTML = `<p class="text-gray-400 italic">No bookings recorded in current session memory yet. Test a reservation via the checkout widget!</p>`;
+    return;
+  }
+
+  container.innerHTML = '';
+  window.hotelReservations.forEach(res => {
+    container.innerHTML += `
+      <div class="bg-neutral-950 border border-white/10 p-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+        <div>
+          <span class="text-gold font-mono font-bold">${res.ref}</span>
+          <h5 class="text-white font-semibold mt-1">${res.name} <span class="text-gray-400 text-xs font-normal">(${res.email})</span></h5>
+          <p class="text-gray-400 text-xs">Suite: <span class="text-white">${res.suite}</span> | Nights: <span class="text-white">${res.nights}</span></p>
+        </div>
+        <div class="text-left md:text-right">
+          <span class="text-gold font-bold text-sm">$${res.total.toLocaleString()}</span>
+          <p class="text-gray-500 text-[10px]">${res.date}</p>
+        </div>
+      </div>
+    `;
+  });
+}
 
 // Dynamic Suite Addition by Management
 document.getElementById('addSuiteForm').addEventListener('submit', (e) => {
