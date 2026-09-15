@@ -1,3 +1,41 @@
+// Gatekeeper Authentication Logic
+const authGateModal = document.getElementById('authGateModal');
+const mainWebsiteContent = document.getElementById('mainWebsiteContent');
+const gateLoginTab = document.getElementById('gateLoginTab');
+const gateRegisterTab = document.getElementById('gateRegisterTab');
+const gateLoginForm = document.getElementById('gateLoginForm');
+const gateRegisterForm = document.getElementById('gateRegisterForm');
+
+gateLoginTab.addEventListener('click', () => {
+  gateLoginTab.classList.add('text-gold', 'border-b-2', 'border-gold');
+  gateLoginTab.classList.remove('text-gray-400');
+  gateRegisterTab.classList.remove('text-gold', 'border-b-2', 'border-gold');
+  gateRegisterTab.classList.add('text-gray-400');
+  gateLoginForm.classList.remove('hidden');
+  gateRegisterForm.classList.add('hidden');
+});
+
+gateRegisterTab.addEventListener('click', () => {
+  gateRegisterTab.classList.add('text-gold', 'border-b-2', 'border-gold');
+  gateRegisterTab.classList.remove('text-gray-400');
+  gateLoginTab.classList.remove('text-gold', 'border-b-2', 'border-gold');
+  gateLoginTab.classList.add('text-gray-400');
+  gateRegisterForm.classList.remove('hidden');
+  gateLoginForm.classList.add('hidden');
+});
+
+gateLoginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  authGateModal.classList.add('hidden');
+  mainWebsiteContent.classList.remove('hidden');
+});
+
+gateRegisterForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  authGateModal.classList.add('hidden');
+  mainWebsiteContent.classList.remove('hidden');
+});
+
 let currentBookingData = { nights: 0, total: 0, suiteName: '' };
 window.hotelReservations = window.hotelReservations || [];
 

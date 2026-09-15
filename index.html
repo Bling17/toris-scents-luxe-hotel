@@ -28,313 +28,22 @@
   </head>
   <body class="bg-darkBg text-white">
 
-    <!-- Navigation Bar -->
-    <header class="absolute top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6 border-b border-white/10">
-      <div class="text-2xl tracking-widest uppercase serif-font text-gold font-bold">
-        Toris Scents Luxe
-      </div>
-      <nav class="hidden md:flex space-x-8 text-sm tracking-widest uppercase text-gray-300">
-        <a href="#rooms" class="hover:text-gold transition">Suites</a>
-        <a href="#dining" class="hover:text-gold transition">Dining</a>
-        <a href="#amenities" class="hover:text-gold transition">Amenities</a>
-        <a href="#gallery" class="hover:text-gold transition">Gallery</a>
-<!-- Add this inside your Navigation <nav>  -->
-    <button id="openAdminBtn" class="text-xs uppercase tracking-widest text-gold hover:text-white transition hidden md:block border border-gold/30 px-3 py-1.5">
-      Management Admin
-    </button>
-      </nav>
-      <div class="flex items-center space-x-4">
-        <button id="openAuthBtn" class="text-xs uppercase tracking-widest text-gray-300 hover:text-gold transition hidden md:block">
-          Sign In / Up
-        </button>
-        <a href="#book" class="bg-gold text-darkBg px-6 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-white transition">
-          Book Your Stay
-        </a>
-      </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2000&q=80');">
-      <div class="text-center px-4 max-w-3xl">
-        <span class="text-gold uppercase tracking-[0.3em] text-sm mb-4 block">Uncompromising Luxury & Elegance</span>
-        <h1 class="text-5xl md:text-7xl font-bold tracking-wide mb-6">Experience Timeless Splendor</h1>
-        <p class="text-gray-300 text-lg mb-8 font-light">Immerse yourself in world-class comfort, breathtaking views, and bespoke hospitality tailored just for you.</p>
-        <div class="flex justify-center space-x-4">
-          <a href="#rooms" class="border border-gold text-gold px-8 py-4 text-xs uppercase tracking-widest hover:bg-gold hover:text-darkBg transition">Explore Suites</a>
+    <!-- Auth Gatekeeper Overlay (Shown by Default) -->
+    <div id="authGateModal" class="fixed inset-0 bg-neutral-950 z-[100] flex items-center justify-center p-4">
+      <div class="bg-neutral-900 border border-gold max-w-md w-full p-8 shadow-2xl relative text-center">
+        <div class="text-2xl tracking-widest uppercase serif-font text-gold font-bold mb-2">
+          Toris Scents Luxe
         </div>
-      </div>
-    </section>
-
-    <!-- Interactive Booking Calculator Widget -->
-    <section id="book" class="bg-neutral-900 border-y border-white/10 py-12 px-6">
-      <div class="max-w-4xl mx-auto bg-black border border-gold/30 p-8 shadow-2xl">
-        <h3 class="text-2xl font-bold text-center mb-6 serif-font text-gold">Reserve Your Experience</h3>
-        
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-          <div>
-            <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Check-in Date</label>
-            <input type="date" id="checkin" class="w-full bg-neutral-900 border border-white/20 p-3 text-white text-sm focus:border-gold outline-none">
-          </div>
-          <div>
-            <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Check-out Date</label>
-            <input type="date" id="checkout" class="w-full bg-neutral-900 border border-white/20 p-3 text-white text-sm focus:border-gold outline-none">
-          </div>
-          <div>
-            <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Select Suite</label>
-            <select id="suiteType" class="w-full bg-neutral-900 border border-white/20 p-3 text-white text-sm focus:border-gold outline-none">
-              <option value="1200">The Royal Penthouse ($1,200/night)</option>
-              <option value="850">Oceanfront Deluxe ($850/night)</option>
-              <option value="650">Executive Garden Villa ($650/night)</option>
-            </select>
-          </div>
-          <div>
-            <button id="calculateBtn" class="w-full bg-gold text-darkBg py-3 text-xs uppercase tracking-widest font-bold hover:bg-white transition h-[46px]">
-              Calculate Total
-            </button>
-          </div>
-        </div>
-
-        <!-- Result Display Area -->
-        <div id="resultArea" class="hidden mt-6 pt-6 border-t border-white/10 text-center">
-          <p class="text-gray-300 text-sm mb-1">Estimated Stay Total for <span id="nightsCount" class="text-gold font-bold">0</span> Nights:</p>
-          <div id="totalPrice" class="text-3xl font-bold text-gold serif-font">$0</div>
-          <button class="mt-4 bg-transparent border border-gold text-gold px-6 py-2 text-xs uppercase tracking-widest hover:bg-gold hover:text-darkBg transition">
-            Proceed to Secure Checkout
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Rooms & Suites Showcase Grid -->
-    <section id="rooms" class="py-24 px-8 max-w-7xl mx-auto">
-      <div class="text-center mb-16">
-        <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Accommodations</span>
-        <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">Signature Suites & Residences</h2>
-        <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Each sanctuary is meticulously designed to offer sweeping vistas, bespoke furnishings, and uncompromising 5-star comfort.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Room 1: The Royal Penthouse -->
-        <div class="bg-neutral-900 border border-white/10 group overflow-hidden transition duration-300 hover:border-gold/50">
-          <div class="h-64 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80');"></div>
-          <div class="p-6">
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs uppercase tracking-widest text-gold">Top Tier</span>
-              <span class="text-xs text-gray-400">Max 3 Guests</span>
-            </div>
-            <h3 class="text-2xl font-bold mb-2 serif-font">The Royal Penthouse</h3>
-            <p class="text-gray-400 text-sm mb-6 font-light">Panoramic city views, private 24/7 butler service, and an expansive master marble bathroom with a deep soaking tub.</p>
-            <div class="flex justify-between items-center pt-4 border-t border-white/10">
-              <div>
-                <span class="text-gold font-bold text-xl serif-font">$1,200</span>
-                <span class="text-xs text-gray-400"> / night</span>
-              </div>
-              <a href="#book" class="bg-gold text-darkBg px-4 py-2 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Reserve Suite</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Room 2: Oceanfront Deluxe Suite -->
-        <div class="bg-neutral-900 border border-white/10 group overflow-hidden transition duration-300 hover:border-gold/50">
-          <div class="h-64 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=800&q=80');"></div>
-          <div class="p-6">
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs uppercase tracking-widest text-gold">Most Popular</span>
-              <span class="text-xs text-gray-400">Max 2 Guests</span>
-            </div>
-            <h3 class="text-2xl font-bold mb-2 serif-font">Oceanfront Deluxe Suite</h3>
-            <p class="text-gray-400 text-sm mb-6 font-light">Direct ocean vistas from a private wrap-around terrace, plush king-size bedding, and hand-crafted room amenities.</p>
-            <div class="flex justify-between items-center pt-4 border-t border-white/10">
-              <div>
-                <span class="text-gold font-bold text-xl serif-font">$850</span>
-                <span class="text-xs text-gray-400"> / night</span>
-              </div>
-              <a href="#book" class="bg-gold text-darkBg px-4 py-2 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Reserve Suite</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Room 3: Executive Garden Villa -->
-        <div class="bg-neutral-900 border border-white/10 group overflow-hidden transition duration-300 hover:border-gold/50">
-          <div class="h-64 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80');"></div>
-          <div class="p-6">
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs uppercase tracking-widest text-gold">Secluded Sanctuary</span>
-              <span class="text-xs text-gray-400">Max 4 Guests</span>
-            </div>
-            <h3 class="text-2xl font-bold mb-2 serif-font">Executive Garden Villa</h3>
-            <p class="text-gray-400 text-sm mb-6 font-light">A private sanctuary featuring your own secluded plunge pool, lush tropical courtyard, and a cozy outdoor stone fireplace.</p>
-            <div class="flex justify-between items-center pt-4 border-t border-white/10">
-              <div>
-                <span class="text-gold font-bold text-xl serif-font">$650</span>
-                <span class="text-xs text-gray-400"> / night</span>
-              </div>
-              <a href="#book" class="bg-gold text-darkBg px-4 py-2 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Reserve Suite</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Fine Dining & Culinary Experiences Section -->
-    <section id="dining" class="py-24 px-8 max-w-7xl mx-auto border-t border-white/10">
-      <div class="text-center mb-16">
-        <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Gastronomy</span>
-        <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">World-Class Fine Dining</h2>
-        <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Savor extraordinary culinary artistry crafted by award-winning international chefs, paired with rare vintages from our subterranean cellar.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <!-- Dining Item 1 -->
-        <div class="group overflow-hidden border border-white/10 bg-neutral-900">
-          <div class="h-80 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1000&q=80');"></div>
-          <div class="p-8">
-            <span class="text-xs uppercase tracking-widest text-gold mb-2 block">Signature Restaurant</span>
-            <h3 class="text-3xl font-bold mb-3 serif-font">L'Aurelia Haute Cuisine</h3>
-            <p class="text-gray-400 text-sm mb-6 font-light">An exquisite multi-course tasting menu blending French culinary techniques with rare local flavors, served in an ambient, candle-lit dining room.</p>
-            <div class="flex justify-between items-center text-xs uppercase tracking-widest text-gray-300 border-t border-white/10 pt-4">
-              <span>Hours: 6:00 PM – 11:00 PM</span>
-              <button onclick="openMenuModal('restaurant')" class="text-gold border-b border-gold pb-1 hover:text-white transition">View Menu</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Dining Item 2 -->
-        <div class="group overflow-hidden border border-white/10 bg-neutral-900">
-          <div class="h-80 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1000&q=80');"></div>
-          <div class="p-8">
-            <span class="text-xs uppercase tracking-widest text-gold mb-2 block">Rooftop Lounge</span>
-            <h3 class="text-3xl font-bold mb-3 serif-font">The Obsidian Sky Bar</h3>
-            <p class="text-gray-400 text-sm mb-6 font-light">Unwind above the skyline with bespoke artisanal cocktails, vintage champagne selections, and live ambient jazz performances under the stars.</p>
-            <div class="flex justify-between items-center text-xs uppercase tracking-widest text-gray-300 border-t border-white/10 pt-4">
-              <span>Hours: 4:00 PM – 2:00 AM</span>
-              <button onclick="openMenuModal('bar')" class="text-gold border-b border-gold pb-1 hover:text-white transition">View Menu</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Amenities & Wellness Section -->
-    <section id="amenities" class="py-24 px-8 max-w-7xl mx-auto border-t border-white/10">
-      <div class="text-center mb-16">
-        <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Indulgence & Relaxation</span>
-        <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">Unmatched Hotel Amenities</h2>
-        <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Curated to rejuvenate your mind, body, and spirit throughout your stay.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <!-- Amenity 1 -->
-        <div class="bg-neutral-900 border border-white/10 p-8 text-center hover:border-gold/50 transition">
-          <div class="text-gold text-3xl mb-4">✦</div>
-          <h3 class="text-xl font-bold mb-2 serif-font">Aurelia Spa & Wellness</h3>
-          <p class="text-gray-400 text-xs leading-relaxed font-light">Holistic massages, hydrotherapy pools, and personalized organic skincare treatments.</p>
-        </div>
-
-        <!-- Amenity 2 -->
-        <div class="bg-neutral-900 border border-white/10 p-8 text-center hover:border-gold/50 transition">
-          <div class="text-gold text-3xl mb-4">✦</div>
-          <h3 class="text-xl font-bold mb-2 serif-font">Infinity Pool & Cabanas</h3>
-          <p class="text-gray-400 text-xs leading-relaxed font-light">Temperature-controlled cliffside infinity pool paired with private VIP cabana service.</p>
-        </div>
-
-        <!-- Amenity 3 -->
-        <div class="bg-neutral-900 border border-white/10 p-8 text-center hover:border-gold/50 transition">
-          <div class="text-gold text-3xl mb-4">✦</div>
-          <h3 class="text-xl font-bold mb-2 serif-font">Private Yacht Charter</h3>
-          <p class="text-gray-400 text-xs leading-relaxed font-light">Explore pristine coastline waters on our luxury private yacht with a dedicated crew.</p>
-        </div>
-
-        <!-- Amenity 4 -->
-        <div class="bg-neutral-900 border border-white/10 p-8 text-center hover:border-gold/50 transition">
-          <div class="text-gold text-3xl mb-4">✦</div>
-          <h3 class="text-xl font-bold mb-2 serif-font">24/7 Elite Concierge</h3>
-          <p class="text-gray-400 text-xs leading-relaxed font-light">From private jet arrangements to custom excursions, our concierge handles every detail.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Secure Checkout Modal -->
-    <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-      <div class="bg-neutral-900 border border-gold/50 max-w-lg w-full p-8 shadow-2xl relative">
-        <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
-        
-        <!-- Active Checkout Form View -->
-        <div id="checkoutFormView">
-          <h3 class="text-2xl font-bold mb-2 serif-font text-gold">Secure Reservation Checkout</h3>
-          <p class="text-gray-400 text-xs mb-6 font-light">Complete your guest and payment details to confirm your stay at Toris Scents Luxe.</p>
-          
-          <!-- Summary Box -->
-          <div class="bg-black border border-white/10 p-4 mb-6 text-xs space-y-2">
-            <div class="flex justify-between"><span class="text-gray-400">Selected Suite:</span> <span id="modalSuiteName" class="text-white font-semibold">Penthouse</span></div>
-            <div class="flex justify-between"><span class="text-gray-400">Total Nights:</span> <span id="modalNights" class="text-white font-semibold">1</span></div>
-            <div class="flex justify-between pt-2 border-t border-white/10 text-sm"><span class="text-gold font-bold">Total Amount:</span> <span id="modalTotalPrice" class="text-gold font-bold">$1,200</span></div>
-          </div>
-
-          <!-- Guest & Payment Form -->
-          <form id="paymentForm" class="space-y-4 text-xs">
-            <div>
-              <label class="block text-gray-400 uppercase tracking-widest mb-1">Full Name</label>
-              <input type="text" id="guestName" required placeholder="Josh Osagie" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
-            </div>
-            <div>
-              <label class="block text-gray-400 uppercase tracking-widest mb-1">Email Address</label>
-              <input type="email" id="guestEmail" required placeholder="josh@example.com" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
-            </div>
-            <div>
-              <label class="block text-gray-400 uppercase tracking-widest mb-1">Card Number</label>
-              <input type="text" required placeholder="4532 •••• •••• 8921" maxlength="19" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label class="block text-gray-400 uppercase tracking-widest mb-1">Expiry Date</label>
-                <input type="text" required placeholder="MM/YY" maxlength="5" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
-              </div>
-              <div>
-                <label class="block text-gray-400 uppercase tracking-widest mb-1">CVV</label>
-                <input type="password" required placeholder="123" maxlength="4" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
-              </div>
-            </div>
-            
-            <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-2">
-              Confirm & Pay Securely
-            </button>
-          </form>
-        </div>
-
-        <!-- Success E-Receipt View (Hidden Initially) -->
-        <div id="successReceipt" class="hidden text-center py-6 space-y-4">
-          <div class="text-gold text-5xl mb-2">✦</div>
-          <h4 class="text-2xl font-bold serif-font text-gold">Reservation Confirmed</h4>
-          <p class="text-gray-300 text-xs">Thank you, <span id="receiptName" class="text-white font-semibold"></span>! Your payment has been securely processed.</p>
-          
-          <div class="bg-black border border-white/10 p-4 text-left text-xs space-y-2 mt-4">
-            <div class="flex justify-between"><span class="text-gray-400">Reference ID:</span> <span id="receiptRef" class="text-gold font-mono font-bold"></span></div>
-            <div class="flex justify-between"><span class="text-gray-400">Suite Booked:</span> <span id="receiptSuite" class="text-white"></span></div>
-            <div class="flex justify-between"><span class="text-gray-400">Total Paid:</span> <span id="receiptAmount" class="text-gold font-bold"></span></div>
-          </div>
-
-          <button id="closeReceiptBtn" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-6">
-            Return to Homepage
-          </button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Auth Modal (Login / Sign Up) -->
-    <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-      <div class="bg-neutral-900 border border-gold/50 max-w-md w-full p-8 shadow-2xl relative">
-        <button id="closeAuthModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
+        <p class="text-gray-400 text-xs mb-8 font-light">Please sign in or create an account to enter our exclusive 5-star digital sanctuary.</p>
         
         <!-- Tab Switcher -->
         <div class="flex border-b border-white/10 mb-6 text-xs uppercase tracking-widest font-bold">
-          <button id="tabLoginBtn" class="flex-1 pb-3 text-gold border-b-2 border-gold transition">Sign In</button>
-          <button id="tabRegisterBtn" class="flex-1 pb-3 text-gray-400 hover:text-white transition">Create Account</button>
+          <button id="gateLoginTab" type="button" class="flex-1 pb-3 text-gold border-b-2 border-gold transition">Sign In</button>
+          <button id="gateRegisterTab" type="button" class="flex-1 pb-3 text-gray-400 hover:text-white transition">Create Account</button>
         </div>
 
-        <!-- Login Form -->
-        <form id="loginForm" class="space-y-4 text-xs">
+        <!-- Gate Login Form -->
+        <form id="gateLoginForm" class="space-y-4 text-xs text-left">
           <div>
             <label class="block text-gray-400 uppercase tracking-widest mb-1">Email Address</label>
             <input type="email" required placeholder="josh@example.com" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
@@ -344,12 +53,12 @@
             <input type="password" required placeholder="••••••••" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
           </div>
           <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-2">
-            Access Account
+            Enter Sanctuary
           </button>
         </form>
 
-        <!-- Register Form (Hidden by Default) -->
-        <form id="registerForm" class="space-y-4 text-xs hidden">
+        <!-- Gate Register Form (Hidden by Default) -->
+        <form id="gateRegisterForm" class="space-y-4 text-xs text-left hidden">
           <div>
             <label class="block text-gray-400 uppercase tracking-widest mb-1">Full Name</label>
             <input type="text" required placeholder="Josh Osagie" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
@@ -363,224 +72,569 @@
             <input type="password" required placeholder="••••••••" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
           </div>
           <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-2">
-            Register Account
+            Register & Enter
           </button>
         </form>
       </div>
     </div>
 
-    <!-- Dining Menu Modal -->
-    <div id="diningMenuModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-      <div class="bg-neutral-900 border border-gold/50 max-w-xl w-full p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-        <button id="closeMenuModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
-        
-        <span id="menuSubtitle" class="text-xs uppercase tracking-[0.3em] text-gold mb-1 block">Culinary Offering</span>
-        <h3 id="menuTitle" class="text-3xl font-bold mb-4 serif-font text-white">Menu Title</h3>
-        <p id="menuDescription" class="text-gray-400 text-xs mb-6 font-light">Explore our curated selections.</p>
-        
-        <!-- Menu Items Container -->
-        <div id="menuItemsList" class="space-y-4 text-xs border-t border-white/10 pt-6">
-          <!-- Dynamically populated via JS -->
+    <!-- Main Website Content (Hidden until authenticated) -->
+    <div id="mainWebsiteContent" class="hidden">
+      <!-- Navigation Bar -->
+      <header class="absolute top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6 border-b border-white/10">
+        <div class="text-2xl tracking-widest uppercase serif-font text-gold font-bold">
+          Toris Scents Luxe
         </div>
+        <nav class="hidden md:flex space-x-8 text-sm tracking-widest uppercase text-gray-300">
+          <a href="#rooms" class="hover:text-gold transition">Suites</a>
+          <a href="#dining" class="hover:text-gold transition">Dining</a>
+          <a href="#amenities" class="hover:text-gold transition">Amenities</a>
+          <a href="#gallery" class="hover:text-gold transition">Gallery</a>
+          <button id="openAdminBtn" class="text-xs uppercase tracking-widest text-gold hover:text-white transition hidden md:block border border-gold/30 px-3 py-1.5">
+            Management Admin
+          </button>
+        </nav>
+        <div class="flex items-center space-x-4">
+          <button id="openAuthBtn" class="text-xs uppercase tracking-widest text-gray-300 hover:text-gold transition hidden md:block">
+            Sign In / Up
+          </button>
+          <a href="#book" class="bg-gold text-darkBg px-6 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-white transition">
+            Book Your Stay
+          </a>
+        </div>
+      </header>
 
-        <button onclick="document.getElementById('diningMenuModal').classList.add('hidden')" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-8">
-          Close Menu
-        </button>
-      </div>
-    </div>
-
-<!-- Interactive Photo Gallery Section -->
-    <section id="gallery" class="py-24 px-8 max-w-7xl mx-auto border-t border-white/10">
-      <div class="text-center mb-16">
-        <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Visual Journey</span>
-        <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">The Toris Scents Luxe Gallery</h2>
-        <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Explore the breathtaking architecture, lush surroundings, and immaculate interiors that await your arrival.</p>
-      </div>
-
-      <!-- Gallery Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
-          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80" alt="Hotel Exterior" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
-          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-            <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+      <!-- Hero Section -->
+      <section class="relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2000&q=80');">
+        <div class="text-center px-4 max-w-3xl">
+          <span class="text-gold uppercase tracking-[0.3em] text-sm mb-4 block">Uncompromising Luxury & Elegance</span>
+          <h1 class="text-5xl md:text-7xl font-bold tracking-wide mb-6">Experience Timeless Splendor</h1>
+          <p class="text-gray-300 text-lg mb-8 font-light">Immerse yourself in world-class comfort, breathtaking views, and bespoke hospitality tailored just for you.</p>
+          <div class="flex justify-center space-x-4">
+            <a href="#rooms" class="border border-gold text-gold px-8 py-4 text-xs uppercase tracking-widest hover:bg-gold hover:text-darkBg transition">Explore Suites</a>
           </div>
         </div>
-        <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
-          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80" alt="Penthouse Suite" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
-          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-            <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
-          </div>
-        </div>
-        <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
-          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1000&q=80" alt="Fine Dining" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
-          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-            <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
-          </div>
-        </div>
-        <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
-          <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80" alt="Resort Pool" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
-          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-            <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
-          </div>
-        </div>
-        <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
-          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80" alt="Spa & Wellness" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
-          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-            <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
-          </div>
-        </div>
-        <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
-          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80" alt="Luxury Villa" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
-          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-            <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Fullscreen Lightbox Modal -->
-    <div id="lightboxModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-      <button id="closeLightbox" class="absolute top-6 right-8 text-gray-400 hover:text-white text-3xl z-10">&times;</button>
-      <div class="max-w-5xl max-h-[90vh] relative">
-        <img id="lightboxImg" src="" alt="Enlarged View" class="max-w-full max-h-[85vh] object-contain border border-gold/40 shadow-2xl">
-        <p id="lightboxCaption" class="text-center text-gold text-xs uppercase tracking-widest mt-4">Property Showcase</p>
-      </div>
-    </div>
-
-    <!-- Footer Section -->
-    <footer class="bg-neutral-950 border-t border-white/10 py-16 px-8 text-gray-400">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-        <!-- Col 1: Brand Info -->
-        <div>
-          <div class="text-2xl tracking-widest uppercase serif-font text-gold font-bold mb-4">
-            Toris Scents Luxe
-          </div>
-          <p class="text-xs leading-relaxed font-light mb-6">
-            An iconic sanctuary of refined elegance, world-class hospitality, and bespoke luxury experiences tailored for the distinguished traveler.
-          </p>
-          <div class="flex space-x-4 text-gold">
-            <span class="text-sm cursor-pointer hover:text-white transition">Instagram</span>
-            <span class="text-sm cursor-pointer hover:text-white transition">Twitter</span>
-            <span class="text-sm cursor-pointer hover:text-white transition">LinkedIn</span>
-          </div>
-        </div>
-
-        <!-- Col 2: Quick Links -->
-        <div>
-          <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-4">Navigation</h4>
-          <ul class="space-y-2 text-xs font-light">
-            <li><a href="#rooms" class="hover:text-gold transition">Suites & Residences</a></li>
-            <li><a href="#dining" class="hover:text-gold transition">Fine Dining</a></li>
-            <li><a href="#amenities" class="hover:text-gold transition">Spa & Amenities</a></li>
-            <li><a href="#book" class="hover:text-gold transition">Reservations</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Contact Details -->
-        <div>
-          <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-4">Concierge Desk</h4>
-          <p class="text-xs font-light mb-2">100 Luxury Avenue, Coastline View</p>
-          <p class="text-xs font-light mb-2">Phone: +1 (800) 555-LUXE</p>
-          <p class="text-xs font-light">Email: concierge@torisscentsluxe.com</p>
-        </div>
-
-        <!-- Col 4: Newsletter -->
-        <div>
-          <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-4">Private Journal</h4>
-          <p class="text-xs font-light mb-4">Subscribe to receive exclusive seasonal offers and private event invitations.</p>
-          <div class="flex">
-            <input type="email" placeholder="Enter your email" class="bg-neutral-900 border border-white/20 p-2 text-xs text-white outline-none focus:border-gold w-full">
-            <button class="bg-gold text-darkBg px-4 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Join</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Copyright Bottom Bar -->
-      <div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs font-light">
-        <p>&copy; 2026 Toris Scents Luxe Hotel & Suites. All Rights Reserved.</p>
-        <p class="text-gray-400 mt-2 md:mt-0">Designed & Developed by <span class="text-gold font-semibold">Osagie</span></p>
-        <div class="flex space-x-6 mt-4 md:mt-0">
-          <a href="#" class="hover:text-gold transition">Privacy Policy</a>
-          <a href="#" class="hover:text-gold transition">Terms of Service</a>
-          <a href="#" class="hover:text-gold transition">Security</a>
-        </div>
-      </div>
-    </footer>
-<!-- Management Admin Portal Modal -->
-    <div id="adminModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-      <div class="bg-neutral-900 border border-gold max-w-3xl w-full p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-        <button id="closeAdminModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
-        
-        <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
-          <div>
-            <span class="text-xs uppercase tracking-[0.3em] text-gold block">Toris Scents Luxe Management</span>
-            <h3 class="text-2xl font-bold serif-font text-white">Hotel Administration Dashboard</h3>
-          </div>
-          <button id="adminLogoutBtn" class="bg-neutral-800 text-gray-300 px-4 py-2 text-xs uppercase tracking-wider hover:bg-gold hover:text-darkBg transition">Lock Dashboard</button>
-        </div>
-
-        <!-- Admin Login Screen (Protected View) -->
-        <div id="adminLoginView" class="max-w-sm mx-auto py-8">
-          <h4 class="text-lg font-bold text-gold serif-font mb-4 text-center">Restricted Access</h4>
-          <p class="text-gray-400 text-xs text-center mb-6 font-light">Enter hotel management credentials to access the content control panel.</p>
-          <form id="adminLoginForm" class="space-y-4 text-xs">
+      <!-- Interactive Booking Calculator Widget -->
+      <section id="book" class="bg-neutral-900 border-y border-white/10 py-12 px-6">
+        <div class="max-w-4xl mx-auto bg-black border border-gold/30 p-8 shadow-2xl">
+          <h3 class="text-2xl font-bold text-center mb-6 serif-font text-gold">Reserve Your Experience</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
             <div>
-              <label class="block text-gray-400 uppercase tracking-widest mb-1">Admin Passcode</label>
-              <input type="password" id="adminPasscode" required placeholder="••••••••" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold text-center tracking-widest">
+              <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Check-in Date</label>
+              <input type="date" id="checkin" class="w-full bg-neutral-900 border border-white/20 p-3 text-white text-sm focus:border-gold outline-none">
             </div>
-            <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition">
-              Authenticate Admin
-            </button>
-          </form>
-        </div>
-
-        <!-- Admin Dashboard Content (Unlocked View) -->
-        <div id="adminDashboardView" class="hidden space-y-8">
-          <!-- Tab Navigation -->
-          <div class="flex border-b border-white/10 text-xs uppercase tracking-widest font-bold">
-            <button id="tabSuitesBtn" class="pb-3 px-4 text-gold border-b-2 border-gold transition">Manage Suites</button>
-            <button id="tabReservationsBtn" class="pb-3 px-4 text-gray-400 hover:text-white transition">Guest Bookings</button>
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Check-out Date</label>
+              <input type="date" id="checkout" class="w-full bg-neutral-900 border border-white/20 p-3 text-white text-sm focus:border-gold outline-none">
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Select Suite</label>
+              <select id="suiteType" class="w-full bg-neutral-900 border border-white/20 p-3 text-white text-sm focus:border-gold outline-none">
+                <option value="1200">The Royal Penthouse ($1,200/night)</option>
+                <option value="850">Oceanfront Deluxe ($850/night)</option>
+                <option value="650">Executive Garden Villa ($650/night)</option>
+              </select>
+            </div>
+            <div>
+              <button id="calculateBtn" type="button" class="w-full bg-gold text-darkBg py-3 text-xs uppercase tracking-widest font-bold hover:bg-white transition h-[46px]">
+                Calculate Total
+              </button>
+            </div>
           </div>
 
-          <!-- Section 1: Add / Edit Suites Form -->
-          <div id="adminSuitesPanel" class="space-y-6">
-            <h4 class="text-sm font-bold uppercase tracking-wider text-gold">Add New Suite / Residence</h4>
-            <form id="addSuiteForm" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <!-- Result Display Area -->
+          <div id="resultArea" class="hidden mt-6 pt-6 border-t border-white/10 text-center">
+            <p class="text-gray-300 text-sm mb-1">Estimated Stay Total for <span id="nightsCount" class="text-gold font-bold">0</span> Nights:</p>
+            <div id="totalPrice" class="text-3xl font-bold text-gold serif-font">$0</div>
+            <button type="button" class="mt-4 bg-transparent border border-gold text-gold px-6 py-2 text-xs uppercase tracking-widest hover:bg-gold hover:text-darkBg transition">
+              Proceed to Secure Checkout
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rooms & Suites Showcase Grid -->
+      <section id="rooms" class="py-24 px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Accommodations</span>
+          <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">Signature Suites & Residences</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Each sanctuary is meticulously designed to offer sweeping vistas, bespoke furnishings, and uncompromising 5-star comfort.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Room 1: The Royal Penthouse -->
+          <div class="bg-neutral-900 border border-white/10 group overflow-hidden transition duration-300 hover:border-gold/50">
+            <div class="h-64 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xs uppercase tracking-widest text-gold">Top Tier</span>
+                <span class="text-xs text-gray-400">Max 3 Guests</span>
+              </div>
+              <h3 class="text-2xl font-bold mb-2 serif-font">The Royal Penthouse</h3>
+              <p class="text-gray-400 text-sm mb-6 font-light">Panoramic city views, private 24/7 butler service, and an expansive master marble bathroom with a deep soaking tub.</p>
+              <div class="flex justify-between items-center pt-4 border-t border-white/10">
+                <div>
+                  <span class="text-gold font-bold text-xl serif-font">$1,200</span>
+                  <span class="text-xs text-gray-400"> / night</span>
+                </div>
+                <a href="#book" class="bg-gold text-darkBg px-4 py-2 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Reserve Suite</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Room 2: Oceanfront Deluxe Suite -->
+          <div class="bg-neutral-900 border border-white/10 group overflow-hidden transition duration-300 hover:border-gold/50">
+            <div class="h-64 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xs uppercase tracking-widest text-gold">Most Popular</span>
+                <span class="text-xs text-gray-400">Max 2 Guests</span>
+              </div>
+              <h3 class="text-2xl font-bold mb-2 serif-font">Oceanfront Deluxe Suite</h3>
+              <p class="text-gray-400 text-sm mb-6 font-light">Direct ocean vistas from a private wrap-around terrace, plush king-size bedding, and hand-crafted room amenities.</p>
+              <div class="flex justify-between items-center pt-4 border-t border-white/10">
+                <div>
+                  <span class="text-gold font-bold text-xl serif-font">$850</span>
+                  <span class="text-xs text-gray-400"> / night</span>
+                </div>
+                <a href="#book" class="bg-gold text-darkBg px-4 py-2 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Reserve Suite</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Room 3: Executive Garden Villa -->
+          <div class="bg-neutral-900 border border-white/10 group overflow-hidden transition duration-300 hover:border-gold/50">
+            <div class="h-64 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xs uppercase tracking-widest text-gold">Secluded Sanctuary</span>
+                <span class="text-xs text-gray-400">Max 4 Guests</span>
+              </div>
+              <h3 class="text-2xl font-bold mb-2 serif-font">Executive Garden Villa</h3>
+              <p class="text-gray-400 text-sm mb-6 font-light">A private sanctuary featuring your own secluded plunge pool, lush tropical courtyard, and a cozy outdoor stone fireplace.</p>
+              <div class="flex justify-between items-center pt-4 border-t border-white/10">
+                <div>
+                  <span class="text-gold font-bold text-xl serif-font">$650</span>
+                  <span class="text-xs text-gray-400"> / night</span>
+                </div>
+                <a href="#book" class="bg-gold text-darkBg px-4 py-2 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Reserve Suite</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fine Dining & Culinary Experiences Section -->
+      <section id="dining" class="py-24 px-8 max-w-7xl mx-auto border-t border-white/10">
+        <div class="text-center mb-16">
+          <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Gastronomy</span>
+          <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">World-Class Fine Dining</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Savor extraordinary culinary artistry crafted by award-winning international chefs, paired with rare vintages from our subterranean cellar.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <!-- Dining Item 1 -->
+          <div class="group overflow-hidden border border-white/10 bg-neutral-900">
+            <div class="h-80 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1000&q=80');"></div>
+            <div class="p-8">
+              <span class="text-xs uppercase tracking-widest text-gold mb-2 block">Signature Restaurant</span>
+              <h3 class="text-3xl font-bold mb-3 serif-font">L'Aurelia Haute Cuisine</h3>
+              <p class="text-gray-400 text-sm mb-6 font-light">An exquisite multi-course tasting menu blending French culinary techniques with rare local flavors, served in an ambient, candle-lit dining room.</p>
+              <div class="flex justify-between items-center text-xs uppercase tracking-widest text-gray-300 border-t border-white/10 pt-4">
+                <span>Hours: 6:00 PM – 11:00 PM</span>
+                <button type="button" onclick="openMenuModal('restaurant')" class="text-gold border-b border-gold pb-1 hover:text-white transition">View Menu</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dining Item 2 -->
+          <div class="group overflow-hidden border border-white/10 bg-neutral-900">
+            <div class="h-80 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1000&q=80');"></div>
+            <div class="p-8">
+              <span class="text-xs uppercase tracking-widest text-gold mb-2 block">Rooftop Lounge</span>
+              <h3 class="text-3xl font-bold mb-3 serif-font">The Obsidian Sky Bar</h3>
+              <p class="text-gray-400 text-sm mb-6 font-light">Unwind above the skyline with bespoke artisanal cocktails, vintage champagne selections, and live ambient jazz performances under the stars.</p>
+              <div class="flex justify-between items-center text-xs uppercase tracking-widest text-gray-300 border-t border-white/10 pt-4">
+                <span>Hours: 4:00 PM – 2:00 AM</span>
+                <button type="button" onclick="openMenuModal('bar')" class="text-gold border-b border-gold pb-1 hover:text-white transition">View Menu</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Amenities & Wellness Section -->
+      <section id="amenities" class="py-24 px-8 max-w-7xl mx-auto border-t border-white/10">
+        <div class="text-center mb-16">
+          <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Indulgence & Relaxation</span>
+          <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">Unmatched Hotel Amenities</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Curated to rejuvenate your mind, body, and spirit throughout your stay.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <!-- Amenity 1 -->
+          <div class="bg-neutral-900 border border-white/10 p-8 text-center hover:border-gold/50 transition">
+            <div class="text-gold text-3xl mb-4">✦</div>
+            <h3 class="text-xl font-bold mb-2 serif-font">Aurelia Spa & Wellness</h3>
+            <p class="text-gray-400 text-xs leading-relaxed font-light">Holistic massages, hydrotherapy pools, and personalized organic skincare treatments.</p>
+          </div>
+
+          <!-- Amenity 2 -->
+          <div class="bg-neutral-900 border border-white/10 p-8 text-center hover:border-gold/50 transition">
+            <div class="text-gold text-3xl mb-4">✦</div>
+            <h3 class="text-xl font-bold mb-2 serif-font">Infinity Pool & Cabanas</h3>
+            <p class="text-gray-400 text-xs leading-relaxed font-light">Temperature-controlled cliffside infinity pool paired with private VIP cabana service.</p>
+          </div>
+
+          <!-- Amenity 3 -->
+          <div class="bg-neutral-900 border border-white/10 p-8 text-center hover:border-gold/50 transition">
+            <div class="text-gold text-3xl mb-4">✦</div>
+            <h3 class="text-xl font-bold mb-2 serif-font">Private Yacht Charter</h3>
+            <p class="text-gray-400 text-xs leading-relaxed font-light">Explore pristine coastline waters on our luxury private yacht with a dedicated crew.</p>
+          </div>
+
+          <!-- Amenity 4 -->
+          <div class="bg-neutral-900 border border-white/10 p-8 text-center hover:border-gold/50 transition">
+            <div class="text-gold text-3xl mb-4">✦</div>
+            <h3 class="text-xl font-bold mb-2 serif-font">24/7 Elite Concierge</h3>
+            <p class="text-gray-400 text-xs leading-relaxed font-light">From private jet arrangements to custom excursions, our concierge handles every detail.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Photo Gallery Section -->
+      <section id="gallery" class="py-24 px-8 max-w-7xl mx-auto border-t border-white/10">
+        <div class="text-center mb-16">
+          <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Visual Journey</span>
+          <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">The Toris Scents Luxe Gallery</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Explore the breathtaking architecture, lush surroundings, and immaculate interiors that await your arrival.</p>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80" alt="Hotel Exterior" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+            </div>
+          </div>
+          <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
+            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80" alt="Penthouse Suite" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+            </div>
+          </div>
+          <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
+            <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1000&q=80" alt="Fine Dining" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+            </div>
+          </div>
+          <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
+            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80" alt="Resort Pool" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+            </div>
+          </div>
+          <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80" alt="Spa & Wellness" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+            </div>
+          </div>
+          <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80" alt="Luxury Villa" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Section -->
+      <footer class="bg-neutral-950 border-t border-white/10 py-16 px-8 text-gray-400">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <!-- Col 1: Brand Info -->
+          <div>
+            <div class="text-2xl tracking-widest uppercase serif-font text-gold font-bold mb-4">
+              Toris Scents Luxe
+            </div>
+            <p class="text-xs leading-relaxed font-light mb-6">
+              An iconic sanctuary of refined elegance, world-class hospitality, and bespoke luxury experiences tailored for the distinguished traveler.
+            </p>
+            <div class="flex space-x-4 text-gold">
+              <span class="text-sm cursor-pointer hover:text-white transition">Instagram</span>
+              <span class="text-sm cursor-pointer hover:text-white transition">Twitter</span>
+              <span class="text-sm cursor-pointer hover:text-white transition">LinkedIn</span>
+            </div>
+          </div>
+
+          <!-- Col 2: Quick Links -->
+          <div>
+            <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-4">Navigation</h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li><a href="#rooms" class="hover:text-gold transition">Suites & Residences</a></li>
+              <li><a href="#dining" class="hover:text-gold transition">Fine Dining</a></li>
+              <li><a href="#amenities" class="hover:text-gold transition">Spa & Amenities</a></li>
+              <li><a href="#book" class="hover:text-gold transition">Reservations</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Contact Details -->
+          <div>
+            <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-4">Concierge Desk</h4>
+            <p class="text-xs font-light mb-2">100 Luxury Avenue, Coastline View</p>
+            <p class="text-xs font-light mb-2">Phone: +1 (800) 555-LUXE</p>
+            <p class="text-xs font-light">Email: concierge@torisscentsluxe.com</p>
+          </div>
+
+          <!-- Col 4: Newsletter -->
+          <div>
+            <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-4">Private Journal</h4>
+            <p class="text-xs font-light mb-4">Subscribe to receive exclusive seasonal offers and private event invitations.</p>
+            <div class="flex">
+              <input type="email" placeholder="Enter your email" class="bg-neutral-900 border border-white/20 p-2 text-xs text-white outline-none focus:border-gold w-full">
+              <button type="button" class="bg-gold text-darkBg px-4 text-xs uppercase tracking-widest font-bold hover:bg-white transition">Join</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copyright Bottom Bar -->
+        <div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs font-light">
+          <p>&copy; 2026 Toris Scents Luxe Hotel & Suites. All Rights Reserved.</p>
+          <p class="text-gray-400 mt-2 md:mt-0">Designed & Developed by <span class="text-gold font-semibold">Osagie</span></p>
+          <div class="flex space-x-6 mt-4 md:mt-0">
+            <a href="#" class="hover:text-gold transition">Privacy Policy</a>
+            <a href="#" class="hover:text-gold transition">Terms of Service</a>
+            <a href="#" class="hover:text-gold transition">Security</a>
+          </div>
+        </div>
+      </footer>
+
+      <!-- Secure Checkout Modal -->
+      <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-neutral-900 border border-gold/50 max-w-lg w-full p-8 shadow-2xl relative">
+          <button id="closeModal" type="button" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
+          
+          <!-- Active Checkout Form View -->
+          <div id="checkoutFormView">
+            <h3 class="text-2xl font-bold mb-2 serif-font text-gold">Secure Reservation Checkout</h3>
+            <p class="text-gray-400 text-xs mb-6 font-light">Complete your guest and payment details to confirm your stay at Toris Scents Luxe.</p>
+            
+            <!-- Summary Box -->
+            <div class="bg-black border border-white/10 p-4 mb-6 text-xs space-y-2">
+              <div class="flex justify-between"><span class="text-gray-400">Selected Suite:</span> <span id="modalSuiteName" class="text-white font-semibold">Penthouse</span></div>
+              <div class="flex justify-between"><span class="text-gray-400">Total Nights:</span> <span id="modalNights" class="text-white font-semibold">1</span></div>
+              <div class="flex justify-between pt-2 border-t border-white/10 text-sm"><span class="text-gold font-bold">Total Amount:</span> <span id="modalTotalPrice" class="text-gold font-bold">$1,200</span></div>
+            </div>
+
+            <!-- Guest & Payment Form -->
+            <form id="paymentForm" class="space-y-4 text-xs">
               <div>
-                <label class="block text-gray-400 uppercase tracking-widest mb-1">Suite Title</label>
-                <input type="text" id="newSuiteTitle" required placeholder="Imperial Royal Suite" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+                <label class="block text-gray-400 uppercase tracking-widest mb-1">Full Name</label>
+                <input type="text" id="guestName" required placeholder="Josh Osagie" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
               </div>
               <div>
-                <label class="block text-gray-400 uppercase tracking-widest mb-1">Price Per Night ($)</label>
-                <input type="number" id="newSuitePrice" required placeholder="1500" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+                <label class="block text-gray-400 uppercase tracking-widest mb-1">Email Address</label>
+                <input type="email" id="guestEmail" required placeholder="josh@example.com" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
               </div>
-              <div class="md:col-span-2">
-                <label class="block text-gray-400 uppercase tracking-widest mb-1">Unsplash Image URL</label>
-                <input type="url" id="newSuiteImg" required placeholder="https://images.unsplash.com/..." class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+              <div>
+                <label class="block text-gray-400 uppercase tracking-widest mb-1">Card Number</label>
+                <input type="text" required placeholder="4532 •••• •••• 8921" maxlength="19" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
               </div>
-              <div class="md:col-span-2">
-                <label class="block text-gray-400 uppercase tracking-widest mb-1">Suite Description</label>
-                <textarea id="newSuiteDesc" required rows="2" placeholder="Private elevator, rooftop terrace..." class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold"></textarea>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-gray-400 uppercase tracking-widest mb-1">Expiry Date</label>
+                  <input type="text" required placeholder="MM/YY" maxlength="5" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+                </div>
+                <div>
+                  <label class="block text-gray-400 uppercase tracking-widest mb-1">CVV</label>
+                  <input type="password" required placeholder="123" maxlength="4" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+                </div>
               </div>
-              <div class="md:col-span-2">
-                <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition">
-                  Publish Suite Live to Website
-                </button>
-              </div>
+              
+              <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-2">
+                Confirm & Pay Securely
+              </button>
             </form>
           </div>
 
-          <!-- Section 2: Guest Reservations Panel -->
-          <div id="adminReservationsPanel" class="hidden space-y-4">
-            <h4 class="text-sm font-bold uppercase tracking-wider text-gold">Recent Guest Reservations</h4>
-            <div id="reservationsListContainer" class="space-y-2 text-xs">
-              <p class="text-gray-400 italic">No bookings recorded in current session memory yet. Test a reservation via the checkout widget!</p>
+          <!-- Success E-Receipt View (Hidden Initially) -->
+          <div id="successReceipt" class="hidden text-center py-6 space-y-4">
+            <div class="text-gold text-5xl mb-2">✦</div>
+            <h4 class="text-2xl font-bold serif-font text-gold">Reservation Confirmed</h4>
+            <p class="text-gray-300 text-xs">Thank you, <span id="receiptName" class="text-white font-semibold"></span>! Your payment has been securely processed.</p>
+            
+            <div class="bg-black border border-white/10 p-4 text-left text-xs space-y-2 mt-4">
+              <div class="flex justify-between"><span class="text-gray-400">Reference ID:</span> <span id="receiptRef" class="text-gold font-mono font-bold"></span></div>
+              <div class="flex justify-between"><span class="text-gray-400">Suite Booked:</span> <span id="receiptSuite" class="text-white"></span></div>
+              <div class="flex justify-between"><span class="text-gray-400">Total Paid:</span> <span id="receiptAmount" class="text-gold font-bold"></span></div>
+            </div>
+
+            <button id="closeReceiptBtn" type="button" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-6">
+              Return to Homepage
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Auth Modal (Login / Sign Up) -->
+      <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-neutral-900 border border-gold/50 max-w-md w-full p-8 shadow-2xl relative">
+          <button id="closeAuthModal" type="button" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
+          
+          <!-- Tab Switcher -->
+          <div class="flex border-b border-white/10 mb-6 text-xs uppercase tracking-widest font-bold">
+            <button id="tabLoginBtn" type="button" class="flex-1 pb-3 text-gold border-b-2 border-gold transition">Sign In</button>
+            <button id="tabRegisterBtn" type="button" class="flex-1 pb-3 text-gray-400 hover:text-white transition">Create Account</button>
+          </div>
+
+          <!-- Login Form -->
+          <form id="loginForm" class="space-y-4 text-xs">
+            <div>
+              <label class="block text-gray-400 uppercase tracking-widest mb-1">Email Address</label>
+              <input type="email" required placeholder="josh@example.com" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+            </div>
+            <div>
+              <label class="block text-gray-400 uppercase tracking-widest mb-1">Password</label>
+              <input type="password" required placeholder="••••••••" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+            </div>
+            <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-2">
+              Access Account
+            </button>
+          </form>
+
+          <!-- Register Form (Hidden by Default) -->
+          <form id="registerForm" class="space-y-4 text-xs hidden">
+            <div>
+              <label class="block text-gray-400 uppercase tracking-widest mb-1">Full Name</label>
+              <input type="text" required placeholder="Josh Osagie" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+            </div>
+            <div>
+              <label class="block text-gray-400 uppercase tracking-widest mb-1">Email Address</label>
+              <input type="email" required placeholder="josh@example.com" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+            </div>
+            <div>
+              <label class="block text-gray-400 uppercase tracking-widest mb-1">Create Password</label>
+              <input type="password" required placeholder="••••••••" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+            </div>
+            <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-2">
+              Register Account
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Dining Menu Modal -->
+      <div id="diningMenuModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-neutral-900 border border-gold/50 max-w-xl w-full p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+          <button id="closeMenuModal" type="button" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
+          
+          <span id="menuSubtitle" class="text-xs uppercase tracking-[0.3em] text-gold mb-1 block">Culinary Offering</span>
+          <h3 id="menuTitle" class="text-3xl font-bold mb-4 serif-font text-white">Menu Title</h3>
+          <p id="menuDescription" class="text-gray-400 text-xs mb-6 font-light">Explore our curated selections.</p>
+          
+          <!-- Menu Items Container -->
+          <div id="menuItemsList" class="space-y-4 text-xs border-t border-white/10 pt-6">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+          <button type="button" onclick="document.getElementById('diningMenuModal').classList.add('hidden')" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-8">
+            Close Menu
+          </button>
+        </div>
+      </div>
+
+      <!-- Fullscreen Lightbox Modal -->
+      <div id="lightboxModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <button id="closeLightbox" type="button" class="absolute top-6 right-8 text-gray-400 hover:text-white text-3xl z-10">&times;</button>
+        <div class="max-w-5xl max-h-[90vh] relative">
+          <img id="lightboxImg" src="" alt="Enlarged View" class="max-w-full max-h-[85vh] object-contain border border-gold/40 shadow-2xl">
+          <p id="lightboxCaption" class="text-center text-gold text-xs uppercase tracking-widest mt-4">Property Showcase</p>
+        </div>
+      </div>
+
+      <!-- Management Admin Portal Modal -->
+      <div id="adminModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-neutral-900 border border-gold max-w-3xl w-full p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+          <button id="closeAdminModal" type="button" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
+          
+          <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+            <div>
+              <span class="text-xs uppercase tracking-[0.3em] text-gold block">Toris Scents Luxe Management</span>
+              <h3 class="text-2xl font-bold serif-font text-white">Hotel Administration Dashboard</h3>
+            </div>
+            <button id="adminLogoutBtn" type="button" class="bg-neutral-800 text-gray-300 px-4 py-2 text-xs uppercase tracking-wider hover:bg-gold hover:text-darkBg transition">Lock Dashboard</button>
+          </div>
+
+          <!-- Admin Login Screen (Protected View) -->
+          <div id="adminLoginView" class="max-w-sm mx-auto py-8">
+            <h4 class="text-lg font-bold text-gold serif-font mb-4 text-center">Restricted Access</h4>
+            <p class="text-gray-400 text-xs text-center mb-6 font-light">Enter hotel management credentials to access the content control panel.</p>
+            <form id="adminLoginForm" class="space-y-4 text-xs">
+              <div>
+                <label class="block text-gray-400 uppercase tracking-widest mb-1">Admin Passcode</label>
+                <input type="password" id="adminPasscode" required placeholder="••••••••" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold text-center tracking-widest">
+              </div>
+              <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition">
+                Authenticate Admin
+              </button>
+            </form>
+          </div>
+
+          <!-- Admin Dashboard Content (Unlocked View) -->
+          <div id="adminDashboardView" class="hidden space-y-8">
+            <!-- Tab Navigation -->
+            <div class="flex border-b border-white/10 text-xs uppercase tracking-widest font-bold">
+              <button id="tabSuitesBtn" type="button" class="pb-3 px-4 text-gold border-b-2 border-gold transition">Manage Suites</button>
+              <button id="tabReservationsBtn" type="button" class="pb-3 px-4 text-gray-400 hover:text-white transition">Guest Bookings</button>
+            </div>
+
+            <!-- Section 1: Add / Edit Suites Form -->
+            <div id="adminSuitesPanel" class="space-y-6">
+              <h4 class="text-sm font-bold uppercase tracking-wider text-gold">Add New Suite / Residence</h4>
+              <form id="addSuiteForm" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div>
+                  <label class="block text-gray-400 uppercase tracking-widest mb-1">Suite Title</label>
+                  <input type="text" id="newSuiteTitle" required placeholder="Imperial Royal Suite" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+                </div>
+                <div>
+                  <label class="block text-gray-400 uppercase tracking-widest mb-1">Price Per Night ($)</label>
+                  <input type="number" id="newSuitePrice" required placeholder="1500" class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+                </div>
+                <div class="md:col-span-2">
+                  <label class="block text-gray-400 uppercase tracking-widest mb-1">Unsplash Image URL</label>
+                  <input type="url" id="newSuiteImg" required placeholder="https://images.unsplash.com/..." class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold">
+                </div>
+                <div class="md:col-span-2">
+                  <label class="block text-gray-400 uppercase tracking-widest mb-1">Suite Description</label>
+                  <textarea id="newSuiteDesc" required rows="2" placeholder="Private elevator, rooftop terrace..." class="w-full bg-neutral-950 border border-white/20 p-3 text-white outline-none focus:border-gold"></textarea>
+                </div>
+                <div class="md:col-span-2">
+                  <button type="submit" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition">
+                    Publish Suite Live to Website
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Section 2: Guest Reservations Panel -->
+            <div id="adminReservationsPanel" class="hidden space-y-4">
+              <h4 class="text-sm font-bold uppercase tracking-wider text-gold">Recent Guest Reservations</h4>
+              <div id="reservationsListContainer" class="space-y-2 text-xs">
+                <p class="text-gray-400 italic">No bookings recorded in current session memory yet. Test a reservation via the checkout widget!</p>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
-    </div>
+
+    </div> <!-- End of mainWebsiteContent -->
 
     <script type="module" src="/src/main.js"></script>
   </body>
