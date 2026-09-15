@@ -155,3 +155,60 @@ registerForm.addEventListener('submit', (e) => {
   alert('Account created successfully! Welcome to your elite member portal.');
   authModal.classList.add('hidden');
 });
+
+// Dining Menu Modal Data & Handlers
+const diningMenuModal = document.getElementById('diningMenuModal');
+const closeMenuModal = document.getElementById('closeMenuModal');
+
+const menuData = {
+  restaurant: {
+    subtitle: "L'Aurelia Haute Cuisine",
+    title: "Tasting & À La Carte Menu",
+    description: "Prepared by Executive Chef Jean-Luc. Dietary accommodations available upon request.",
+    items: [
+      { name: "Pan-Seared Hokkaido Scallops", desc: "Served with saffron cauliflower purée, crispy pancetta, and caviar oil.", price: "$65" },
+      { name: "A5 Wagyu Beef Tenderloin", desc: "Truffle potato fondant, glazed baby root vegetables, and 25-year aged balsamic reduction.", price: "$145" },
+      { name: "Wild Mushroom & Truffle Risotto", desc: "Carnaroli rice, shaved black winter truffle, aged Parmigiano-Reggiano.", price: "$75" },
+      { name: "Valrhona Dark Chocolate Soufflé", desc: "Madagascar vanilla bean crème anglaise and gold leaf crunch.", price: "$35" }
+    ]
+  },
+  bar: {
+    subtitle: "The Obsidian Sky Bar",
+    title: "Bespoke Cocktails & Rare Vintages",
+    description: "Crafted by our master mixologists using premium spirits and house-infused botanicals.",
+    items: [
+      { name: "The Obsidian Gold Old Fashioned", desc: "Hibiki 21 Japanese Whisky, Okinawa black sugar, angostura bitters, 24k edible gold leaf.", price: "$48" },
+      { name: "Midnight Smoked Negroni", desc: "Botanist Islay Gin, Carpano Antica Vermouth, Campari, smoked with rosemary wood.", price: "$32" },
+      { name: "Dom Pérignon Vintage Champagne (Glass)", desc: "Crisp notes of white peach, brioche, and vibrant citrus zest.", price: "$95" },
+      { name: "Artisanal Truffle & Artisanal Cheese Board", desc: "Selection of 4 imported raw-milk cheeses, honeycomb, fig jam, and toasted brioche.", price: "$55" }
+    ]
+  }
+};
+
+window.openMenuModal = function(type) {
+  const data = menuData[type];
+  document.getElementById('menuSubtitle').innerText = data.subtitle;
+  document.getElementById('menuTitle').innerText = data.title;
+  document.getElementById('menuDescription').innerText = data.description;
+  
+  const listContainer = document.getElementById('menuItemsList');
+  listContainer.innerHTML = '';
+  
+  data.items.forEach(item => {
+    listContainer.innerHTML += `
+      <div class="flex justify-between items-start border-b border-white/10 pb-4">
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-1">${item.name}</h4>
+          <p class="text-gray-400 text-xs font-light">${item.desc}</p>
+        </div>
+        <span class="text-gold font-bold text-sm ml-4">${item.price}</span>
+      </div>
+    `;
+  });
+
+  diningMenuModal.classList.remove('hidden');
+};
+
+closeMenuModal.addEventListener('click', () => {
+  diningMenuModal.classList.add('hidden');
+});

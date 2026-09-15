@@ -424,6 +424,63 @@
       </div>
     </div>
 
+    <!-- Fine Dining & Culinary Experiences Section -->
+    <section id="dining" class="py-24 px-8 max-w-7xl mx-auto border-t border-white/10">
+      <div class="text-center mb-16">
+        <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Gastronomy</span>
+        <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">World-Class Fine Dining</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Savor extraordinary culinary artistry crafted by award-winning international chefs, paired with rare vintages from our subterranean cellar.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <!-- Dining Item 1 -->
+        <div class="group overflow-hidden border border-white/10 bg-neutral-900">
+          <div class="h-80 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1000&q=80');"></div>
+          <div class="p-8">
+            <span class="text-xs uppercase tracking-widest text-gold mb-2 block">Signature Restaurant</span>
+            <h3 class="text-3xl font-bold mb-3 serif-font">L'Aurelia Haute Cuisine</h3>
+            <p class="text-gray-400 text-sm mb-6 font-light">An exquisite multi-course tasting menu blending French culinary techniques with rare local flavors, served in an ambient, candle-lit dining room.</p>
+            <div class="flex justify-between items-center text-xs uppercase tracking-widest text-gray-300 border-t border-white/10 pt-4">
+              <span>Hours: 6:00 PM – 11:00 PM</span>
+              <button onclick="openMenuModal('restaurant')" class="text-gold border-b border-gold pb-1 hover:text-white transition">View Menu</button>
+            </div>
+          </div>
+        </div>
+        <!-- Dining Item 2 -->
+        <div class="group overflow-hidden border border-white/10 bg-neutral-900">
+          <div class="h-80 bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1000&q=80');"></div>
+          <div class="p-8">
+            <span class="text-xs uppercase tracking-widest text-gold mb-2 block">Rooftop Lounge</span>
+            <h3 class="text-3xl font-bold mb-3 serif-font">The Obsidian Sky Bar</h3>
+            <p class="text-gray-400 text-sm mb-6 font-light">Unwind above the skyline with bespoke artisanal cocktails, vintage champagne selections, and live ambient jazz performances under the stars.</p>
+            <div class="flex justify-between items-center text-xs uppercase tracking-widest text-gray-300 border-t border-white/10 pt-4">
+              <span>Hours: 4:00 PM – 2:00 AM</span>
+              <button onclick="openMenuModal('bar')" class="text-gold border-b border-gold pb-1 hover:text-white transition">View Menu</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+<!-- Dining Menu Modal -->
+    <div id="diningMenuModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-neutral-900 border border-gold/50 max-w-xl w-full p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <button id="closeMenuModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
+        
+        <span id="menuSubtitle" class="text-xs uppercase tracking-[0.3em] text-gold mb-1 block">Culinary Offering</span>
+        <h3 id="menuTitle" class="text-3xl font-bold mb-4 serif-font text-white">Menu Title</h3>
+        <p id="menuDescription" class="text-gray-400 text-xs mb-6 font-light">Explore our curated selections.</p>
+        
+        <!-- Menu Items Container -->
+        <div id="menuItemsList" class="space-y-4 text-xs border-t border-white/10 pt-6">
+          <!-- Dynamically populated via JS -->
+        </div>
+
+        <button onclick="document.getElementById('diningMenuModal').classList.add('hidden')" class="w-full bg-gold text-darkBg py-3 uppercase tracking-widest font-bold hover:bg-white transition mt-8">
+          Close Menu
+        </button>
+      </div>
+    </div>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
