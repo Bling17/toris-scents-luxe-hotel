@@ -307,3 +307,28 @@ document.getElementById('addSuiteForm').addEventListener('submit', (e) => {
   adminModal.classList.add('hidden');
   document.getElementById('addSuiteForm').reset();
 });
+
+// Interactive Gallery Lightbox Logic
+const lightboxModal = document.getElementById('lightboxModal');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCaption = document.getElementById('lightboxCaption');
+const closeLightbox = document.getElementById('closeLightbox');
+const galleryImages = document.querySelectorAll('.gallery-img');
+
+galleryImages.forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightboxCaption.innerText = img.alt || 'Toris Scents Luxe Property Experience';
+    lightboxModal.classList.remove('hidden');
+  });
+});
+
+closeLightbox.addEventListener('click', () => {
+  lightboxModal.classList.add('hidden');
+});
+
+lightboxModal.addEventListener('click', (e) => {
+  if (e.target === lightboxModal) {
+    lightboxModal.classList.add('hidden');
+  }
+});

@@ -389,6 +389,64 @@
       </div>
     </div>
 
+<!-- Interactive Photo Gallery Section -->
+    <section id="gallery" class="py-24 px-8 max-w-7xl mx-auto border-t border-white/10">
+      <div class="text-center mb-16">
+        <span class="text-gold uppercase tracking-[0.3em] text-sm mb-3 block">Visual Journey</span>
+        <h2 class="text-4xl md:text-5xl font-bold serif-font mb-4">The Toris Scents Luxe Gallery</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto text-sm font-light">Explore the breathtaking architecture, lush surroundings, and immaculate interiors that await your arrival.</p>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80" alt="Hotel Exterior" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+            <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+          </div>
+        </div>
+        <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
+          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80" alt="Penthouse Suite" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+            <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+          </div>
+        </div>
+        <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
+          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1000&q=80" alt="Fine Dining" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+            <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+          </div>
+        </div>
+        <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
+          <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80" alt="Resort Pool" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+            <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+          </div>
+        </div>
+        <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
+          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80" alt="Spa & Wellness" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+            <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+          </div>
+        </div>
+        <div class="overflow-hidden border border-white/10 group cursor-pointer relative h-72">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80" alt="Luxury Villa" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 gallery-img">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+            <span class="text-xs uppercase tracking-widest text-gold border border-gold px-4 py-2 bg-black/60">View Fullscreen</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fullscreen Lightbox Modal -->
+    <div id="lightboxModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+      <button id="closeLightbox" class="absolute top-6 right-8 text-gray-400 hover:text-white text-3xl z-10">&times;</button>
+      <div class="max-w-5xl max-h-[90vh] relative">
+        <img id="lightboxImg" src="" alt="Enlarged View" class="max-w-full max-h-[85vh] object-contain border border-gold/40 shadow-2xl">
+        <p id="lightboxCaption" class="text-center text-gold text-xs uppercase tracking-widest mt-4">Property Showcase</p>
+      </div>
+    </div>
+
     <!-- Footer Section -->
     <footer class="bg-neutral-950 border-t border-white/10 py-16 px-8 text-gray-400">
       <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
@@ -522,7 +580,7 @@
 
       </div>
     </div>
-    
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
