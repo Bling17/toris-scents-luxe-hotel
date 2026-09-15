@@ -145,13 +145,14 @@ document.getElementById('paymentForm').addEventListener('submit', (e) => {
   localStorage.setItem('hotelReservations', JSON.stringify(reservations));
   updateAdminReservationsUI();
 
-  // Populate receipt details
+  // Populate receipt and simulated email notification details
   document.getElementById('receiptName').innerText = guestName;
+  document.getElementById('receiptEmailDisplay').innerText = guestEmail;
   document.getElementById('receiptRef').innerText = randomRef;
   document.getElementById('receiptSuite').innerText = currentBookingData.suiteName;
   document.getElementById('receiptAmount').innerText = `$${currentBookingData.total.toLocaleString()}`;
 
-  // Switch modal view to receipt
+  // Switch modal view to receipt/email pass
   checkoutFormView.classList.add('hidden');
   successReceipt.classList.remove('hidden');
 });
