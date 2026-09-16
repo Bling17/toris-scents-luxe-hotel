@@ -8,6 +8,7 @@ const gateRegisterForm = document.getElementById('gateRegisterForm');
 
 // Navigation Auth Button reference
 const openAuthBtn = document.getElementById('openAuthBtn');
+const logoutBtn = document.getElementById('logoutBtn');
 
 gateLoginTab.addEventListener('click', () => {
   gateLoginTab.classList.add('text-gold', 'border-b-2', 'border-gold');
@@ -37,13 +38,18 @@ function handleSuccessfulAuth(nameOrEmail) {
   applyUserAuthState(formattedName);
 }
 
-// Applies the user's name to the UI globally
+// Applies the user's name to the UI globally and reveals the logout button
 function applyUserAuthState(userName) {
   if (openAuthBtn) {
     openAuthBtn.innerText = userName;
     openAuthBtn.classList.remove('text-gray-300');
     openAuthBtn.classList.add('text-gold', 'font-semibold');
     openAuthBtn.style.pointerEvents = 'none'; // Disables click if already logged in
+  }
+
+  // Reveal the Log Out button in the header
+  if (logoutBtn) {
+    logoutBtn.classList.remove('hidden');
   }
 
   if (authGateModal) authGateModal.classList.add('hidden');
@@ -448,7 +454,6 @@ lightboxModal.addEventListener('click', (e) => {
 });
 
 // Logout Handler
-const logoutBtn = document.getElementById('logoutBtn');
 if (logoutBtn) {
   logoutBtn.addEventListener('click', () => {
     // Clear session storage
