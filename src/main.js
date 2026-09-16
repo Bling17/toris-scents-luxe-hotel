@@ -27,21 +27,36 @@ gateRegisterTab.addEventListener('click', () => {
   gateLoginForm.classList.add('hidden');
 });
 
-// Helper function to handle successful login/registration display update
+// Helper function to handle successful login/registration and save to localStorage
 function handleSuccessfulAuth(nameOrEmail) {
   const derivedName = nameOrEmail.includes('@') ? nameOrEmail.split('@')[0] : nameOrEmail;
   const formattedName = derivedName.charAt(0).toUpperCase() + derivedName.slice(1);
 
+  // Save session state to localStorage
+  localStorage.setItem('hotelLoggedInUser', formattedName);
+  applyUserAuthState(formattedName);
+}
+
+// Applies the user's name to the UI globally
+function applyUserAuthState(userName) {
   if (openAuthBtn) {
-    openAuthBtn.innerText = formattedName;
+    openAuthBtn.innerText = userName;
     openAuthBtn.classList.remove('text-gray-300');
     openAuthBtn.classList.add('text-gold', 'font-semibold');
-    openAuthBtn.style.pointerEvents = 'none';
+    openAuthBtn.style.pointerEvents = 'none'; // Disables click if already logged in
   }
 
-  authGateModal.classList.add('hidden');
-  mainWebsiteContent.classList.remove('hidden');
+  if (authGateModal) authGateModal.classList.add('hidden');
+  if (mainWebsiteContent) mainWebsiteContent.classList.remove('hidden');
 }
+
+// Check on page load if user was already logged in
+window.addEventListener('DOMContentLoaded', () => {
+  const savedUser = localStorage.getItem('hotelLoggedInUser');
+  if (savedUser) {
+    applyUserAuthState(savedUser);
+  }
+});
 
 gateLoginForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -171,7 +186,10 @@ const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
 
 openAuthBtn.addEventListener('click', () => {
-  authModal.classList.remove('hidden');
+  // Only open modal if the user is NOT already logged in
+  if (!localStorage.getItem('hotelLoggedInUser')) {
+    authModal.classList.remove('hidden');
+  }
 });
 
 closeAuthModal.addEventListener('click', () => {
@@ -202,9 +220,9 @@ loginForm.addEventListener('submit', (e) => {
   const derivedName = emailVal.split('@')[0];
   const formattedName = derivedName.charAt(0).toUpperCase() + derivedName.slice(1);
   
-  openAuthBtn.innerText = formattedName;
-  openAuthBtn.classList.remove('text-gray-300');
-  openAuthBtn.classList.add('text-gold', 'font-semibold');
+  localStorage.setItem('hotelLoggedInUser', formattedName);
+  applyUserAuthState(formattedName);
+  
   alert('Welcome back! You have successfully signed in to Toris Scents Luxe.');
   authModal.classList.add('hidden');
 });
@@ -214,9 +232,9 @@ registerForm.addEventListener('submit', (e) => {
   const nameVal = registerForm.querySelector('input[type="text"]').value;
   const formattedName = nameVal.charAt(0).toUpperCase() + nameVal.slice(1);
 
-  openAuthBtn.innerText = formattedName;
-  openAuthBtn.classList.remove('text-gray-300');
-  openAuthBtn.classList.add('text-gold', 'font-semibold');
+  localStorage.setItem('hotelLoggedInUser', formattedName);
+  applyUserAuthState(formattedName);
+  
   alert('Account created successfully! Welcome to your elite member portal.');
   authModal.classList.add('hidden');
 });
