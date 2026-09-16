@@ -81,25 +81,24 @@
     <!-- Main Website Content (Hidden until authenticated) -->
     <div id="mainWebsiteContent" class="hidden">
       <!-- Navigation Bar -->
-      <header class="absolute top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6 border-b border-white/10">
-        <div class="text-2xl tracking-widest uppercase serif-font text-gold font-bold">
-          Toris Scents Luxe
-        </div>
-        <nav class="hidden md:flex space-x-8 text-sm tracking-widest uppercase text-gray-300">
-          <a href="#rooms" class="hover:text-gold transition">Suites</a>
-          <a href="#dining" class="hover:text-gold transition">Dining</a>
-          <a href="#amenities" class="hover:text-gold transition">Amenities</a>
-          <a href="#gallery" class="hover:text-gold transition">Gallery</a>
-          <button id="openAdminBtn" class="text-xs uppercase tracking-widest text-gold hover:text-white transition hidden md:block border border-gold/30 px-3 py-1.5">
-            Management Admin
-          </button>
-        </nav>
-        <div class="flex items-center space-x-4">
-        <!-- Auth / Member Name Button -->
-        <button id="openAuthBtn" class="text-xs uppercase tracking-widest text-gold font-semibold">
+    <header class="absolute top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6 border-b border-white/10">
+      <div class="text-2xl tracking-widest uppercase serif-font text-gold font-bold">
+        Toris Scents Luxe
+      </div>
+      <nav class="hidden md:flex space-x-8 text-sm tracking-widest uppercase text-gray-300 items-center">
+        <a href="#rooms" class="hover:text-gold transition">Suites</a>
+        <a href="#dining" class="hover:text-gold transition">Dining</a>
+        <a href="#amenities" class="hover:text-gold transition">Amenities</a>
+        <a href="#gallery" class="hover:text-gold transition">Gallery</a>
+        <!-- Management Admin Trigger Button -->
+        <button id="openAdminBtn" class="text-gold border border-gold/40 px-3 py-1 text-xs tracking-widest hover:bg-gold hover:text-darkBg transition">
+          Management Admin
+        </button>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <button id="openAuthBtn" class="text-xs uppercase tracking-widest text-gray-300 hover:text-gold transition">
           Member Sign In
         </button>
-        <!-- Logout Button -->
         <button id="logoutBtn" class="hidden text-xs uppercase tracking-widest text-red-400 hover:text-red-300 transition border-l border-white/20 pl-4">
           Log Out
         </button>
@@ -109,7 +108,7 @@
           </a>
         </div>
       </div>
-      </header>
+    </header>
 
       <!-- Hero Section -->
       <section class="relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2000&q=80');">
