@@ -446,3 +446,24 @@ lightboxModal.addEventListener('click', (e) => {
     lightboxModal.classList.add('hidden');
   }
 });
+
+// Logout Handler
+const logoutBtn = document.getElementById('logoutBtn');
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', () => {
+    // Clear session storage
+    localStorage.removeItem('hotelLoggedInUser');
+    
+    // Reset UI back to default
+    if (openAuthBtn) {
+      openAuthBtn.innerText = 'Member Sign In';
+      openAuthBtn.classList.remove('text-gold', 'font-semibold');
+      openAuthBtn.classList.add('text-gray-300');
+      openAuthBtn.style.pointerEvents = 'auto';
+    }
+    
+    logoutBtn.classList.add('hidden');
+    alert('You have successfully logged out of Toris Scents Luxe.');
+    window.location.reload();
+  });
+}
