@@ -302,9 +302,9 @@ closeMenuModal.addEventListener('click', () => {
   diningMenuModal.classList.add('hidden');
 });
 
-// Admin Dashboard Interactivity
+// Admin Dashboard Interactivity Trigger from Gate
 const adminModal = document.getElementById('adminModal');
-const openAdminBtn = document.getElementById('openAdminBtn');
+const openAdminFromGateBtn = document.getElementById('openAdminFromGateBtn');
 const closeAdminModal = document.getElementById('closeAdminModal');
 const adminLoginForm = document.getElementById('adminLoginForm');
 const adminLoginView = document.getElementById('adminLoginView');
@@ -316,10 +316,11 @@ const tabReservationsBtn = document.getElementById('tabReservationsBtn');
 const adminSuitesPanel = document.getElementById('adminSuitesPanel');
 const adminReservationsPanel = document.getElementById('adminReservationsPanel');
 
-openAdminBtn.addEventListener('click', () => {
-  adminModal.classList.remove('hidden');
-  updateAdminReservationsUI();
-});
+if (openAdminFromGateBtn) {
+  openAdminFromGateBtn.addEventListener('click', () => {
+    adminModal.classList.remove('hidden');
+  });
+}
 
 closeAdminModal.addEventListener('click', () => {
   adminModal.classList.add('hidden');
