@@ -347,8 +347,11 @@ const adminSuitesPanel = document.getElementById('adminSuitesPanel');
 const adminReservationsPanel = document.getElementById('adminReservationsPanel');
 
 if (openAdminFromGateBtn) {
-  openAdminFromGateBtn.addEventListener('click', () => {
-    adminModal.classList.remove('hidden');
+  openAdminFromGateBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (adminModal) {
+      adminModal.classList.remove('hidden');
+    }
   });
 }
 
