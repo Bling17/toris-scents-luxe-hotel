@@ -157,7 +157,7 @@ if (closeModalBtn) {
 
 const paymentForm = document.getElementById('paymentForm');
 if (paymentForm) {
-  paymentForm.addEventListener('submit', (e) => {
+  paymentForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const guestName = document.getElementById('guestName').value;
@@ -188,21 +188,24 @@ if (paymentForm) {
     document.getElementById('receiptSuite').innerText = currentBookingData.suiteName;
     document.getElementById('receiptAmount').innerText = `$${currentBookingData.total.toLocaleString()}`;
 
-    // Trigger EmailJS notification to guest
-    const templateParams = {
-      to_name: guestName,
-      to_email: guestEmail,
-      booking_ref: randomRef,
-      suite_name: currentBookingData.suiteName,
-      total_nights: currentBookingData.nights,
-      total_amount: `$${currentBookingData.total.toLocaleString()}`
-    };
+    // Trigger EmailJS notification to guest safely
+    try {
+      const templateParams = {
+        to_name: guestName,
+        to_email: guestEmail,
+        booking_ref: randomRef,
+        suite_name: currentBookingData.suiteName,
+        total_nights: currentBookingData.nights,
+        total_amount: `$${currentBookingData.total.toLocaleString()}`
+      };
 
-    // Initialize EmailJS with your Public Key
-emailjs.init("zjRa4bh4wbTI4H4x");
-
-// Inside your form submit handler:
-emailjs.send('service_xi090fr', 'template_nz9v45b', templateParams)
+      // Initialize and send via EmailJS
+      emailjs.init("zjRa4bh4wbtI4H4x_");
+      const response = await emailjs.send('service_xi090fr', 'template_nz9v45b', templateParams);
+      console.log('Email sent successfully:', response.status, response.text);
+    } catch (err) {
+      console.error('Email sending failed:', err);
+    }
 
     // Switch modal view to receipt/email pass
     checkoutFormView.classList.add('hidden');
