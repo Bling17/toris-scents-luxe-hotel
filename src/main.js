@@ -175,18 +175,34 @@ if (paymentForm) {
       date: new Date().toLocaleDateString()
     };
 
-    // Save to localStorage so it persists across reloads
+    // Save to localStorage
     const reservations = getStoredReservations();
     reservations.push(newReservation);
     localStorage.setItem('hotelReservations', JSON.stringify(reservations));
     updateAdminReservationsUI();
 
-    // Populate receipt and simulated email notification details
+    // Populate receipt UI display
     document.getElementById('receiptName').innerText = guestName;
     document.getElementById('receiptEmailDisplay').innerText = guestEmail;
     document.getElementById('receiptRef').innerText = randomRef;
     document.getElementById('receiptSuite').innerText = currentBookingData.suiteName;
     document.getElementById('receiptAmount').innerText = `$${currentBookingData.total.toLocaleString()}`;
+
+    // Trigger EmailJS notification to guest
+    const templateParams = {
+      to_name: guestName,
+      to_email: guestEmail,
+      booking_ref: randomRef,
+      suite_name: currentBookingData.suiteName,
+      total_nights: currentBookingData.nights,
+      total_amount: `$${currentBookingData.total.toLocaleString()}`
+    };
+
+    // Initialize EmailJS with your Public Key
+emailjs.init("zjRa4bh4wbTI4H4x");
+
+// Inside your form submit handler:
+emailjs.send('service_xi090fr', 'template_nz9v45b', templateParams)
 
     // Switch modal view to receipt/email pass
     checkoutFormView.classList.add('hidden');

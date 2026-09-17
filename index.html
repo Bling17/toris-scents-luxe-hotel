@@ -86,12 +86,9 @@
       </div>
     </div>
 
-    <!-- Main Website Content (Hidden until authenticated) -->
-    <div id="mainWebsiteContent" class="hidden">
-      
-      <!-- Navigation Bar -->
-      <header class="absolute top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6 border-b border-white/10">
-        <div class="text-2xl tracking-widest uppercase serif-font text-gold font-bold">
+    <!-- Navigation Bar -->
+      <header class="absolute top-0 left-0 w-full z-50 flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4 md:py-6 border-b border-white/10 gap-4 bg-black/60 md:bg-transparent backdrop-blur-md md:backdrop-blur-none">
+        <div class="text-xl md:text-2xl tracking-widest uppercase serif-font text-gold font-bold text-center md:text-left">
           Toris Scents Luxe
         </div>
         <nav class="hidden md:flex space-x-8 text-sm tracking-widest uppercase text-gray-300 items-center">
@@ -101,15 +98,15 @@
           <a href="#gallery" class="hover:text-gold transition">Gallery</a>
         </nav>
 
-        <div class="flex items-center space-x-4">
-          <button id="openAuthBtn" type="button" class="text-xs uppercase tracking-widest text-gray-300 hover:text-gold transition">
+        <div class="flex flex-wrap items-center justify-center gap-3 text-xs">
+          <button id="openAuthBtn" type="button" class="uppercase tracking-widest text-gray-300 hover:text-gold transition">
             Member Sign In
           </button>
-          <button id="logoutBtn" type="button" class="hidden text-xs uppercase tracking-widest text-red-400 hover:text-red-300 transition border-l border-white/20 pl-4">
+          <button id="logoutBtn" type="button" class="hidden uppercase tracking-widest text-red-400 hover:text-red-300 transition border-l border-white/20 pl-3">
             Log Out
           </button>
           <div>
-            <a href="#book" class="bg-gold text-darkBg px-6 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-white transition">
+            <a href="#book" class="bg-gold text-darkBg px-4 md:px-6 py-2 md:py-3 uppercase tracking-widest font-semibold hover:bg-white transition inline-block">
               Book Your Stay
             </a>
           </div>
@@ -601,7 +598,10 @@
       </div>
 
     </div> <!-- End of mainWebsiteContent -->
+<!-- EmailJS SDK -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-    <script type="module" src="/src/main.js"></script>
+<!-- Main Application Script -->
+<script type="module" src="/src/main.js"></script>
   </body>
 </html>
